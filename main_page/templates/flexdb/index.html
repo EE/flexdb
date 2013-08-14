@@ -2,14 +2,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="{% static "flexdb/js/jquery-2.0.2.js" %}"></script>
-    <script src="{% static "flexdb/js/bootstrap-2.3.2.js" %}"></script>
-    <script src="{% static "flexdb/js/angular-1.1.5.js" %}"></script>
+    <script src="{% static "flexdb/js/vendor/jquery-2.0.2.js" %}"></script>
+    <script src="{% static "flexdb/js/vendor/bootstrap-2.3.2.js" %}"></script>
+    <script src="{% static "flexdb/js/vendor/angular-1.1.5.js" %}"></script>
+    <script src="{% static "flexdb/js/helloworld.js" %}"></script>
+    <link rel="stylesheet" href="{% static "flexdb/css/vendor/bootstrap-2.3.2.css" %}">
+    <link rel="stylesheet" href="{% static "flexdb/css/vendor/bootstrap-responsive-2.3.2.css" %}">
+    <link rel="stylesheet" href="{% static "flexdb/css/main.css" %}">
+
 </head>
 
 <body>
 <h3> Hello World!</h3>
 
+<div ng-app = "flexdb">
+    <div ng-controller = "tableControll">
+        <form ng-submit="addUser()" >
+            First name: <input type="text" ng-model="Fname"><br>
+            Last name: <input type="text" ng-model="Lname"><br>
+            Email: <input type="text" ng-model="Email"><br>
+            Country: <input type="text" ng-model="Country"><br>
+            Addres: <input type="text" ng-model="Addres"><br>
+            <input class="btn-primary" type="submit" value="Add" id = "AddUserButton">
+        </form>
+
+
+        <table>
+            <tr>
+                <td>First name</td>
+                <td>Last name</td>
+                <td>Email</td>
+                <td>Country</td>
+                <td>Addres</td>
+            </tr>
+            <tr ng-repeat = "user in users">
+                <td>[[ user.Lname ]]</td>
+                <td>[[ user.Fname ]]</td>
+                <td>[[ user.Email ]]</td>
+                <td>[[ user.Country ]]</td>
+                <td>[[ user.Addres ]]</td>
+            </tr>
+        </table>
+
+    </div>
+</div>
 
 </body>
 
