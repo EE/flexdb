@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from main_page.views import Index
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -6,6 +7,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
+    url(r'^$', Index.as_view()),
     # url(r'^flexdb/', include('flexdb.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
@@ -13,5 +15,4 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', include('main_page.urls')),
 )
