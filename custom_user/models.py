@@ -1,8 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
+
 class CustomUserManager(BaseUserManager):
-    def create_user(self, username=None, email=None, password=None, **extra_fields):
+    def create_user(self, username=None, email=None, password=None):
         if not username:
             raise ValueError('The given username must be set')
 
@@ -33,8 +34,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return self.first_name
 
     def get_full_name(self):
-        full_name = '%s %s' % (self.first_name, self.last_name)
+        full_name = "{} {}".format(self.first_name, self.last_name)
         return full_name.strip()
+
+    def __unicode__(self):
+        return self.username
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
