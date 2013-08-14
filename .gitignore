@@ -1,6 +1,7 @@
 *.log
 *.pot
 *.pyc
+local
 settings_local.py
 bin
 include
