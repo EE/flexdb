@@ -80,6 +80,7 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
 )
+AUTH_USER_MODEL = 'custom_user.CustomUser'
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -115,6 +116,8 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'main_page',
+    'custom_user',
+    'rest_framework',
 )
 
 # A sample logging configuration. The only tangible logging
