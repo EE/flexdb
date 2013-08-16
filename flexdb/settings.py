@@ -2,6 +2,7 @@
 
 from flexdb.settings_local import *
 
+COMPRESS_ENABLED = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -72,6 +73,7 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
+
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'tzw5v9c@wjil4x-elu18e_wz4k2dpi4_qtdb%sz)q(_i+h00do'
 
@@ -89,7 +91,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'flexdb.urls'
