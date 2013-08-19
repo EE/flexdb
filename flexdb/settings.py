@@ -2,6 +2,7 @@
 
 from flexdb.settings_local import *
 
+COMPRESS_ENABLED = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -69,7 +70,9 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'compressor.finders.CompressorFinder',
 )
+
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'tzw5v9c@wjil4x-elu18e_wz4k2dpi4_qtdb%sz)q(_i+h00do'
@@ -89,7 +92,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'flexdb.urls'
@@ -104,20 +107,21 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    # django
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'south',
-    # Uncomment the next line to enable the admin:
     'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    # third party
+    'south',
+    'compressor',
+    'rest_framework',
+    # components
     'main_page',
     'custom_user',
-    'rest_framework',
 )
 
 # A sample logging configuration. The only tangible logging

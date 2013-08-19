@@ -1,14 +1,20 @@
 {% load staticfiles %}
+{% load compress %}
 <!DOCTYPE html>
 <html>
 <head>
+    {% compress js %}
     <script src="{% static "flexdb/js/vendor/jquery-2.0.2.js" %}"></script>
     <script src="{% static "flexdb/js/vendor/bootstrap-2.3.2.js" %}"></script>
     <script src="{% static "flexdb/js/vendor/angular-1.1.5.js" %}"></script>
     <script src="{% static "flexdb/js/helloworld.js" %}"></script>
+    {% endcompress %}
+
+    {% compress css %}
     <link rel="stylesheet" href="{% static "flexdb/css/vendor/bootstrap-2.3.2.css" %}">
     <link rel="stylesheet" href="{% static "flexdb/css/vendor/bootstrap-responsive-2.3.2.css" %}">
     <link rel="stylesheet" href="{% static "flexdb/css/main.css" %}">
+    {% endcompress %}
 
 </head>
 
