@@ -2,3 +2,4 @@ django
 south
 psycopg2
 django_compressor
+djangorestframework
