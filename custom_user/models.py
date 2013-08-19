@@ -23,10 +23,10 @@ class CustomUserManager(BaseUserManager):
         return user
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=127, unique=True)
-    first_name = models.CharField(max_length=63, blank=True)
-    last_name = models.CharField(max_length=63, blank=True)
-    email = models.EmailField(blank=True)
+    username = models.CharField("user name", max_length=127, unique=True)
+    first_name = models.CharField("first name", max_length=63, blank=True)
+    last_name = models.CharField("last name", max_length=63, blank=True)
+    email = models.EmailField("email", blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
