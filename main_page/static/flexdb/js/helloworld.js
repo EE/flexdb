@@ -10,26 +10,11 @@ var myApp = angular.module('flexdb', []).
 function tableControll ($scope, $http){
 
     $scope.data = {};
-    $scope.data.Logged = false;
     $scope.user = {};
-    $scope.userid = -1;
+    $scope.user_URL = "";
     $scope.is_user_data_shown = false;
 
-    function getID () {
-        $http({
-            method: 'GET',
-            url: '/mainPageAjax/getUserData'
-        }).success( function  ajaxDone (data) {
-            if (data.Logged != null){
-                $scope.data.Logged = data.Logged;
 
-                if (data.userid != null){
-                    $scope.userid = data.userid;
-
-                }
-            }
-        });
-    }
 
     function ajaxDone(data) {
             if (data.username != null) {
@@ -53,16 +38,21 @@ function tableControll ($scope, $http){
     $scope.loadUserData = function () {
         $http({
             method: 'GET',
-            url: '/accounts/users/'+$scope.userid+'/'
-            }).success( function  (data) { ajaxDone(data) });
-        if ($scope.data.Logged === true)
-            $scope.is_user_data_shown = true;
+            url: '/accounts/users/'
+            }).success( function  (data) { ajaxDone(data[0]);
+                if (data[0].url != null) {
+                    $scope.user_URL = data[0].url
+                }
+            })
+            if ($scope.user_URL != null) {
+                $scope.is_user_data_shown = true;
+            }
     }
 
     $scope.changeUserData = function () {
         $http({
             method: 'PUT',
-            url: '/accounts/users/'+$scope.userid+'/',
+            url: $scope.user_URL,
             data: angular.toJson($scope.data)
             }).success( function  (data) { ajaxDone(data) });
     }
@@ -70,7 +60,5 @@ function tableControll ($scope, $http){
     $scope.hideUserData = function () {
         $scope.is_user_data_shown = false;
     }
-
-    getID();
 
 }
