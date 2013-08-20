@@ -1,9 +1,12 @@
-from django.views.generic import TemplateView, View
+from django.views.generic import TemplateView
 from django.http import HttpResponse
-from custom_user.models import CustomUser
-from django.test.client import Client
-import json
+from django.contrib.auth import logout
+
 
 
 class Index(TemplateView):
     template_name = "flexdb/index.html"
+
+def logout_view(request):
+    logout(request)
+    return HttpResponse('ok')

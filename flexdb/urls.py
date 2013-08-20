@@ -13,6 +13,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', include('main_page.urls')),
+    url(r'', include('main_page.urls')),
     url(r'^accounts/', include('custom_user.urls')),
+    url(r'', include('social_auth.urls')),
 )

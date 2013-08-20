@@ -16,3 +16,7 @@ DATABASES = {
         'PORT': '5432',                      # Set to empty string for default.
     }
 }
+
+# social_auth
+GOOGLE_OAUTH2_CLIENT_ID = ''
+GOOGLE_OAUTH2_CLIENT_SECRET = ''
