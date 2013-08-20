@@ -20,7 +20,7 @@
 
 <body>
 <h3> Hello World!</h3>
-
+<a href="{% url 'socialauth_begin' 'google-oauth2' %}">Login</a>
 <div ng-app = "flexdb">
     <div ng-controller = "tableControll">
         <form ng-submit="addUser()" >
