@@ -85,6 +85,11 @@ TEMPLATE_LOADERS = (
 )
 AUTH_USER_MODEL = 'custom_user.CustomUser'
 
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.google.GoogleOAuth2Backend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -106,6 +111,17 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    'social_auth.context_processors.social_auth_by_type_backends',
+)
+
 INSTALLED_APPS = (
     # django
     'django.contrib.auth',
@@ -119,6 +135,7 @@ INSTALLED_APPS = (
     'south',
     'compressor',
     'rest_framework',
+    'social_auth',
     # components
     'main_page',
     'custom_user',
@@ -152,3 +169,17 @@ LOGGING = {
         },
     }
 }
+
+# social_auth
+LOGIN_URL          = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_ERROR_URL    = '/login-error/'
+
+SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
+SOCIAL_AUTH_UID_LENGTH = 222
+SOCIAL_AUTH_NONCE_SERVER_URL_LENGTH = 200
+SOCIAL_AUTH_ASSOCIATION_SERVER_URL_LENGTH = 135
+SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 125
+SOCIAL_AUTH_ENABLED_BACKENDS = ('google',)
+SOCIAL_AUTH_USER_MODEL = 'custom_user.CustomUser'
+# social_auth end
