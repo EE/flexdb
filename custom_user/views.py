@@ -2,6 +2,7 @@ from rest_framework import viewsets
 from custom_user.serializers import CustomUserSerializer
 from custom_user.models import CustomUser
 from custom_user.permissions import IsOwner
+from django.shortcuts import render
 
 
 class CustomUserViewSet(viewsets.ModelViewSet):
@@ -12,3 +13,6 @@ class CustomUserViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         user = self.request.user
         return self.model.objects.filter(id=user.id)
+
+def userEditView(request):
+    return render(request, 'custom_user/custom_user.html', {})

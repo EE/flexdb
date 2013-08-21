@@ -19,17 +19,17 @@
 </head>
 
 <body>
-<div ng-app = "flexdb">
-
+<div ng-app="flexdb">
     <div class="navbar">
         <div class="navbar-inner">
         <ul class="nav">
-            <li><a href="{% url 'socialauth_begin' 'google-oauth2' %}">Login</a></li>
-            <li><a href="/logout/">Logout</a></li>
+            <li ng-show="!is_user_data_shown"><a href="{% url 'socialauth_begin' 'google-oauth2' %}">Login</a></li>
+            <li ng-show="is_user_data_shown"><a href="/logout/">Logout</a></li>
         </ul>
         </div>
     </div>
 
+    <useredit></useredit>
 </div>
 </body>
 
