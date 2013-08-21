@@ -1,0 +1,35 @@
+<div ng-controller="tableControll">
+
+    <input class="btn-primary" type="submit" value="Change your data" ng-click="loadUserData()"
+           ng-show="!is_user_data_shown">
+    <input class="btn-primary" type="submit" value="Finish changing" ng-click="hideUserData()"
+           ng-show="is_user_data_shown">
+    <br/><br/>
+
+    <div ng-show="is_user_data_shown">
+        <table>
+            <tr>
+                <td>User</td>
+                <td>First name</td>
+                <td>Last name</td>
+                <td>Email</td>
+            </tr>
+            <tr>
+                <td>[[ user.username ]]</td>
+                <td>[[ user.last_name ]]</td>
+                <td>[[ user.first_name ]]</td>
+                <td>[[ user.email ]]</td>
+            </tr>
+        </table>
+        <br>
+
+        <form ng-submit="changeUserData()">
+            User: <input type="text" ng-model="data.username"><br>
+            First name: <input type="text" ng-model="data.last_name"><br>
+            Last name: <input type="text" ng-model="data.first_name"><br>
+            Email: <input type="text" ng-model="data.email"><br>
+            <input class="btn-primary" type="submit" value="Change" id="AddUserButton">
+        </form>
+    </div>
+
+</div>
