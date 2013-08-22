@@ -1,5 +1,4 @@
 var app = angular.module("flexdb", []);
-
 app.config(function ($interpolateProvider, $httpProvider) {
     $interpolateProvider.startSymbol('[[');
     $interpolateProvider.endSymbol(']]');
@@ -9,10 +8,34 @@ app.config(function ($interpolateProvider, $httpProvider) {
 
 app.directive("useredit", function () {
     return {
-        restrict: "E",
-        templateUrl: "/accounts/useredit/"
+        restrict: "AEC",
+        templateUrl: "/accounts/useredit/",
+        transclude: true
     }
 });
+
+
+function mainAppControler($scope, $http, $element, $compile) {
+
+    $scope.apps = {};
+    var newElement = $compile( "<useredit></useredit>" )( $scope );
+    $element.parent().append( newElement );
+
+
+    function loadApps () {
+        $http({
+            method: 'GET',
+            url: '/loadajaxapplication/'
+        }).success(function (data) {
+                if (data.apps != null) {
+                    $scope.apps = data.apps;
+                }
+            })
+    }
+    loadApps ();
+}
+
+
 
 function tableControll($scope, $http) {
 
@@ -20,6 +43,7 @@ function tableControll($scope, $http) {
     $scope.user = {};
     $scope.user_URL = "";
     $scope.is_user_data_shown = false;
+
 
 
     function ajaxDone(data) {
@@ -65,9 +89,9 @@ function tableControll($scope, $http) {
                 ajaxDone(data)
             });
     }
-
+    var changedata = "<useredit></useredit>";
     $scope.hideUserData = function () {
         $scope.is_user_data_shown = false;
     }
-
+    //angular.element.remove(changedata);
 }

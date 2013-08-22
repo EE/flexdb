@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from main_page.views import Index, logout_view
+from main_page.views import Index, logout_view, LoadAjaxApplication
 
 
 # Uncomment the next two lines to enable the admin:
@@ -9,6 +9,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', Index.as_view()),
+    url(r'^loadajaxapplication/$', LoadAjaxApplication.as_view()),
     url(r'^logout/$', logout_view, name='logout_view'),
     # url(r'^flexdb/', include('flexdb.foo.urls')),
 
@@ -17,4 +18,5 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+
 )

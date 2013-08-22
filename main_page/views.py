@@ -9,10 +9,10 @@ class Index(TemplateView):
     template_name = "flexdb/index.html"
 
 
-class Ajax(TemplateView):
+class LoadAjaxApplication(View):
     def get(self, request):
-        data={'apps': settings.INSTALLED_APPS}
-        return HttpResponse(json.dumps(data),content_type="application/json")
+        data = {'apps': settings.INSTALLED_APPS}
+        return HttpResponse(json.dumps(data), content_type="application/json")
 
 
 def logout_view(request):
