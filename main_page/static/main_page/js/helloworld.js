@@ -14,11 +14,26 @@ app.directive("useredit", function () {
     }
 });
 
+app.directive("pusta1", function () {
+    return {
+        restrict: "AEC",
+        templateUrl: "/pusta1/",
+        transclude: true
+    }
+});
+
+app.directive("pusta2", function () {
+    return {
+        restrict: "AEC",
+        templateUrl: "/pusta2/",
+        transclude: true
+    }
+});
 
 function mainAppControler($scope, $http, $element, $compile) {
 
     $scope.apps = {};
-    var newElement = $compile( "<useredit></useredit>" )( $scope );
+    var newElement = $compile( "<pusta1></pusta1>" )( $scope );
     $element.parent().append( newElement );
 
 

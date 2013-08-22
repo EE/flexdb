@@ -11,7 +11,7 @@ class Index(TemplateView):
 
 class LoadAjaxApplication(View):
     def get(self, request):
-        data = {'apps': settings.INSTALLED_APPS}
+        data = {'apps': settings.ADDITIONAL_APPS}
         return HttpResponse(json.dumps(data), content_type="application/json")
 
 

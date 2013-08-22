@@ -16,4 +16,6 @@ urlpatterns = patterns('',
     url(r'', include('main_page.urls')),
     url(r'^accounts/', include('custom_user.urls')),
     url(r'', include('social_auth.urls')),
+    url(r'^pusta1/', include('pusta1.urls')),
+    url(r'^pusta2/', include('pusta2.urls')),
 )

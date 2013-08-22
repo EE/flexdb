@@ -123,7 +123,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 ADDITIONAL_APPS = (
-
+    'pusta1',
+    'pusta2',
 )
 
 INSTALLED_APPS = (
