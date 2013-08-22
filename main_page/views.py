@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView, View
 from django.http import HttpResponse
 from django.contrib.auth import logout
-from flexdb import settings
+from django.conf import settings
 import json
 
 

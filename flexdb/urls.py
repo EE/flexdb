@@ -1,8 +1,10 @@
 from django.conf.urls import patterns, include, url
+from django.conf import settings
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
+
 
 urlpatterns = patterns('',
     # Examples:
@@ -16,6 +18,9 @@ urlpatterns = patterns('',
     url(r'', include('main_page.urls')),
     url(r'^accounts/', include('custom_user.urls')),
     url(r'', include('social_auth.urls')),
-    url(r'^pusta1/', include('pusta1.urls')),
-    url(r'^pusta2/', include('pusta2.urls')),
 )
+
+for x in settings.ADDITIONAL_APPS:
+    urlpatterns += patterns('',
+        url(r'^'+x+'/', include(x+'.urls')),
+    )
