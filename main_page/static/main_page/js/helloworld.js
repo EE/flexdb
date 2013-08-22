@@ -6,7 +6,7 @@ app.config(function ($interpolateProvider, $httpProvider) {
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 });
 
-app.directive("useredit", function () {
+app.directive("useredit", function ($scope) {
     return {
         restrict: "E",
         templateUrl: "/accounts/useredit/"
