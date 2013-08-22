@@ -30,38 +30,15 @@ app.directive("pusta2", function () {
     }
 });
 
-function mainAppControler($scope, $http, $element, $compile) {
 
-    $scope.apps = {};
-    var newElement = $compile( "<pusta1></pusta1>" )( $scope );
-    $element.parent().append( newElement );
-
-
-    function loadApps () {
-        $http({
-            method: 'GET',
-            url: '/loadajaxapplication/'
-        }).success(function (data) {
-                if (data.apps != null) {
-                    $scope.apps = data.apps;
-                }
-            })
-    }
-    loadApps ();
-}
-
-
-
-function tableControll($scope, $http) {
-
+function overalAppControler($scope, $http, $element, $compile) {
     $scope.data = {};
     $scope.user = {};
     $scope.user_URL = "";
-    $scope.is_user_data_shown = false;
+    $scope.logged = false;
 
 
-
-    function ajaxDone(data) {
+    $scope.ajaxDone = function (data) {
         if (data.username != null) {
             $scope.data.username = data.username;
             $scope.user.username = data.username;
@@ -80,20 +57,51 @@ function tableControll($scope, $http) {
         }
     }
 
-    $scope.loadUserData = function () {
+
+    function loadUserData() {
         $http({
             method: 'GET',
             url: '/accounts/users/'
         }).success(function (data) {
-                ajaxDone(data[0]);
+                $scope.ajaxDone(data[0]);
                 if (data[0].url != null) {
                     $scope.user_URL = data[0].url
                 }
             })
-        if ($scope.user_URL != null) {
-            $scope.is_user_data_shown = true;
-        }
     }
+
+    loadUserData();
+
+
+}
+
+function mainAppControler($scope, $http, $element, $compile) {
+
+    $scope.apps = {};
+    var newElement = $compile("<useredit></useredit>")($scope);
+    $element.append(newElement);
+
+
+    function loadApps() {
+        $http({
+            method: 'GET',
+            url: '/loadajaxapplication/'
+        }).success(function (data) {
+                if (data.apps != null) {
+                    $scope.apps = data.apps;
+                    // console.log($scope.apps);
+                }
+            })
+    }
+
+    loadApps();
+    //$element.children(0).remove();
+}
+
+
+function tableControll($scope, $http) {
+
+    $scope.is_user_data_shown = false;
 
     $scope.changeUserData = function () {
         $http({
@@ -101,12 +109,11 @@ function tableControll($scope, $http) {
             url: $scope.user_URL,
             data: angular.toJson($scope.data)
         }).success(function (data) {
-                ajaxDone(data)
+                $scope.ajaxDone(data)
             });
     }
-    var changedata = "<useredit></useredit>";
+
     $scope.hideUserData = function () {
         $scope.is_user_data_shown = false;
     }
-    //angular.element.remove(changedata);
 }

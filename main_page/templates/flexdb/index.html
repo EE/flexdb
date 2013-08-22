@@ -19,17 +19,20 @@
 </head>
 
 <body>
-<div class="navbar">
-    <div class="navbar-inner">
-        <ul class="nav">
-            <li><a href="{% url 'socialauth_begin' 'google-oauth2' %}">Login</a></li>
-            <li><a href="/logout/">Logout</a></li>
-        </ul>
-    </div>
-</div>
-
 <div ng-app="flexdb">
+    <div ng-controller="overalAppControler">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <ul class="nav">
+                    <li><a href="{% url 'socialauth_begin' 'google-oauth2' %}">Login</a></li>
+                    <li><a href="/logout/">Logout</a></li>
+                    <li><a>Change user data</a></li>
+                </ul>
+            </div>
+        </div>
+
         <div ng-controller="mainAppControler">
+
         </div>
     </div>
 </div>

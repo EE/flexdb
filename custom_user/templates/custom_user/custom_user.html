@@ -1,11 +1,5 @@
 <div ng-controller="tableControll">
 
-    <input class="btn-primary" type="submit" value="Change your data" ng-click="loadUserData()"
-           ng-show="!is_user_data_shown">
-    <input class="btn-primary" type="submit" value="Finish changing" ng-click="hideUserData()"
-           ng-show="is_user_data_shown">
-    <br/><br/>
-
     <div ng-show="is_user_data_shown">
         <table>
             <tr>
