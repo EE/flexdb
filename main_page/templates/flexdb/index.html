@@ -20,7 +20,7 @@
 
 <body>
 <div ng-app="flexdb">
-    <div ng-controller="overalAppControler">
+    <div ng-controller="overallAppControler">
         <div class="navbar">
             <div class="navbar-inner">
                 <ul class="nav">
@@ -29,6 +29,12 @@
                     <li><a>Change user data</a></li>
                 </ul>
             </div>
+        </div>
+
+        <div>
+            <ul>
+                <li ng-repeat="x in apps"><a ng-click="appClick(x)">[[ x ]]</a></li>
+            </ul>
         </div>
 
         <div ng-controller="mainAppControler">

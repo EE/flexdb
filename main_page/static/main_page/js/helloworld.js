@@ -31,7 +31,8 @@ app.directive("pusta2", function () {
 });
 
 
-function overalAppControler($scope, $http, $element, $compile) {
+function overallAppControler($scope, $http, $element, $compile) {
+    $scope.apps = {};
     $scope.data = {};
     $scope.user = {};
     $scope.user_URL = "";
@@ -70,17 +71,6 @@ function overalAppControler($scope, $http, $element, $compile) {
             })
     }
 
-    loadUserData();
-
-
-}
-
-function mainAppControler($scope, $http, $element, $compile) {
-
-    $scope.apps = {};
-    var newElement = $compile("<useredit></useredit>")($scope);
-    $element.append(newElement);
-
 
     function loadApps() {
         $http({
@@ -89,12 +79,24 @@ function mainAppControler($scope, $http, $element, $compile) {
         }).success(function (data) {
                 if (data.apps != null) {
                     $scope.apps = data.apps;
-                    // console.log($scope.apps);
                 }
             })
     }
 
+
+    $scope.appClick = function (appName) {
+        var newElement = $compile("<"+appName+">"+"</"+appName+">")($scope);
+        $element.append(newElement);
+        //$element.replaceWith(newElement);
+    }
+
+    loadUserData();
     loadApps();
+}
+
+function mainAppControler($scope, $http, $element, $compile) {
+    var newElement = $compile("<useredit></useredit>")($scope);
+    $element.append(newElement);
     //$element.children(0).remove();
 }
 
