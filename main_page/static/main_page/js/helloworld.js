@@ -1,4 +1,5 @@
 var app = angular.module("flexdb", []);
+
 app.config(function ($interpolateProvider, $httpProvider) {
     $interpolateProvider.startSymbol('[[');
     $interpolateProvider.endSymbol(']]');
@@ -6,7 +7,7 @@ app.config(function ($interpolateProvider, $httpProvider) {
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 });
 
-app.directive("useredit", function ($scope) {
+app.directive("useredit", function () {
     return {
         restrict: "E",
         templateUrl: "/accounts/useredit/"

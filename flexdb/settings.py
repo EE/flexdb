@@ -122,6 +122,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'social_auth.context_processors.social_auth_by_type_backends',
 )
 
+ADDITIONAL_APPS = (
+
+)
+
 INSTALLED_APPS = (
     # django
     'django.contrib.auth',
@@ -139,7 +143,7 @@ INSTALLED_APPS = (
     # components
     'main_page',
     'custom_user',
-)
+) + ADDITIONAL_APPS
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
