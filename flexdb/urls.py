@@ -20,7 +20,7 @@ urlpatterns = patterns('',
     url(r'', include('social_auth.urls')),
 )
 
-for x in settings.ADDITIONAL_APPS:
+for x in settings.FLEXDB_APPS:
     urlpatterns += patterns('',
         url(r'^'+x+'/', include(x+'.urls')),
     )

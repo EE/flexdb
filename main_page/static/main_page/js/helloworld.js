@@ -16,27 +16,9 @@ app.directive("useredit", function () {
     }
 });
 
-app.directive("pusta1", function () {
-    return {
-        restrict: "AEC",
-        templateUrl: "/pusta1/",
-        transclude: true
-    }
-});
-
-app.directive("pusta2", function () {
-    return {
-        restrict: "AEC",
-        templateUrl: "/pusta2/",
-        transclude: true
-    }
-});
-
-
 function overallAppControler($scope, $http, $element, $compile) {
     $scope.apps = {};
     $scope.data = {};
-    $scope.user = {};
     $scope.user_URL = "";
     $scope.logged = false;
     $scope.applist = true;
@@ -45,19 +27,15 @@ function overallAppControler($scope, $http, $element, $compile) {
     $scope.ajaxDone = function (data) {
         if (data.username != null) {
             $scope.data.username = data.username;
-            $scope.user.username = data.username;
         }
         if (data.first_name != null) {
             $scope.data.first_name = data.first_name;
-            $scope.user.first_name = data.first_name;
         }
         if (data.last_name != null) {
             $scope.data.last_name = data.last_name;
-            $scope.user.last_name = data.last_name;
         }
         if (data.email != null) {
             $scope.data.email = data.email;
-            $scope.user.email = data.email;
         }
     }
 
@@ -75,19 +53,6 @@ function overallAppControler($scope, $http, $element, $compile) {
             })
     }
 
-
-    function loadApps() {
-        $http({
-            method: 'GET',
-            url: '/loadajaxapplication/'
-        }).success(function (data) {
-                if (data.apps != null) {
-                    $scope.apps = data.apps;
-                }
-            })
-    }
-
-
     $scope.appClick = function (appName) {
         var newElement = $compile("<"+appName+">"+"</"+appName+">")($scope);
         choosenApp(newElement);
@@ -100,7 +65,6 @@ function overallAppControler($scope, $http, $element, $compile) {
     }
 
     loadUserData();
-    loadApps();
 }
 
 function mainAppControler($scope, $http, $element, $compile) {
