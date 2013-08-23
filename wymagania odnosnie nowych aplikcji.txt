@@ -1,0 +1,31 @@
+"aplikacja" - nazwa Aplikacji
+
+Wymagania dla html:
+Powinien być umieszczony w pliku
+"aplikacja"/templates/"aplikacja"/index.html
+
+Wymagania dla javascriptu:
+Powinien być umieszczony w pliku
+"aplikacja"/static/"aplikacja"/js/main.js
+Ponadto powinien zawierać w sobie dyrektywę, pozwalającą na renderowanie html'a aplikacji
+
+app.directive("aplikacja", function () {
+    return {
+        restrict: "E",
+        templateUrl: "/"aplikacja"/templates/"aplikacja"/index.html",
+        transclude: true
+    }
+});
+
+Oraz 2 funkcje:
+function "aplikacja"globalinit () {...} - inicjalizuje aplikację
+
+function "aplikacja"globalend () {...} - kończy działanie aplikacji
+ 
+
+Wymagania dla css:
+Powinien być umieszczony w pliku
+"aplikacja"/static/"aplikacja"/css/main.css
+
+W settings należy dodać nazwę aplikacji do listy:
+FLEXDB_APPS
