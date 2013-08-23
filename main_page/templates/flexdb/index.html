@@ -26,12 +26,13 @@
                 <ul class="nav">
                     <li><a ng-show = "!logged" href="{% url 'socialauth_begin' 'google-oauth2' %}">Login</a></li>
                     <li><a ng-show = "logged" href="/logout/">Logout</a></li>
-                    <li><a ng-show = "logged" ng-click = hideUserData()>Change user data</a></li>
+                    <li><a ng-show = "logged" ng-click = "changeUserData()">Change user data</a></li>
+                    <li><a ng-click = "goToAppsList()">Go to apps list</a></li>
                 </ul>
             </div>
         </div>
 
-        <div>
+        <div ng-show="applist">
             <ul>
                 <li ng-repeat="x in apps"><a ng-click="appClick(x)">[[ x ]]</a></li>
             </ul>

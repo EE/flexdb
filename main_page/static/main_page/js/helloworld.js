@@ -1,4 +1,6 @@
 var app = angular.module("flexdb", []);
+var choosenApp;
+
 app.config(function ($interpolateProvider, $httpProvider) {
     $interpolateProvider.startSymbol('[[');
     $interpolateProvider.endSymbol(']]');
@@ -38,6 +40,7 @@ function overallAppControler($scope, $http, $element, $compile) {
     $scope.user_URL = "";
     $scope.logged = false;
     $scope.is_user_data_shown = false;
+    $scope.applist = true;
 
 
     $scope.ajaxDone = function (data) {
@@ -88,13 +91,18 @@ function overallAppControler($scope, $http, $element, $compile) {
 
     $scope.appClick = function (appName) {
         var newElement = $compile("<"+appName+">"+"</"+appName+">")($scope);
-        $element.append(newElement);
-        //$element.replaceWith(newElement);
+        choosenApp(newElement);
+        $scope.applist = false;
     }
 
 
-    $scope.hideUserData = function () {
+    $scope.changeUserData = function () {
         $scope.is_user_data_shown = !$scope.is_user_data_shown;
+    }
+
+    $scope.goToAppsList = function () {
+        choosenApp(null);
+        $scope.applist = true;
     }
 
     loadUserData();
@@ -102,9 +110,12 @@ function overallAppControler($scope, $http, $element, $compile) {
 }
 
 function mainAppControler($scope, $http, $element, $compile) {
-    var newElement = $compile("<useredit></useredit>")($scope);
-    $element.append(newElement);
-    //$element.children(0).remove();
+    choosenApp = function (el) {
+        $element.children(0).remove();
+        if(el != null) {
+            $element.append(el);
+        }
+    }
 }
 
 
