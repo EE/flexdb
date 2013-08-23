@@ -39,7 +39,6 @@ function overallAppControler($scope, $http, $element, $compile) {
     $scope.user = {};
     $scope.user_URL = "";
     $scope.logged = false;
-    $scope.is_user_data_shown = false;
     $scope.applist = true;
 
 
@@ -95,11 +94,6 @@ function overallAppControler($scope, $http, $element, $compile) {
         $scope.applist = false;
     }
 
-
-    $scope.showUserData = function () {
-        $scope.is_user_data_shown = !$scope.is_user_data_shown;
-    }
-
     $scope.goToAppsList = function () {
         choosenApp(null);
         $scope.applist = true;
@@ -117,7 +111,6 @@ function mainAppControler($scope, $http, $element, $compile) {
         }
     }
 }
-
 
 function tableControll($scope, $http) {
 

@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView, View
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import logout
 from django.conf import settings
 import json
@@ -17,4 +17,4 @@ class LoadAjaxApplication(View):
 
 def logout_view(request):
     logout(request)
-    return HttpResponse('ok')
+    return HttpResponseRedirect('/')
