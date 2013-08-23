@@ -96,7 +96,7 @@ function overallAppControler($scope, $http, $element, $compile) {
     }
 
 
-    $scope.changeUserData = function () {
+    $scope.showUserData = function () {
         $scope.is_user_data_shown = !$scope.is_user_data_shown;
     }
 

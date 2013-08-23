@@ -7,4 +7,10 @@ th, td {
   width: 200px; }
 
 body {
-  margin: 10px; }
+  margin: 10px;
+  padding-top: 60px;
+  padding-bottom: 40px; }
+
+.hand-click {
+  cursor: pointer;
+  cursor: hand; }
