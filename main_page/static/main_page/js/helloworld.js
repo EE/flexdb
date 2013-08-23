@@ -37,6 +37,7 @@ function overallAppControler($scope, $http, $element, $compile) {
     $scope.user = {};
     $scope.user_URL = "";
     $scope.logged = false;
+    $scope.is_user_data_shown = false;
 
 
     $scope.ajaxDone = function (data) {
@@ -66,7 +67,8 @@ function overallAppControler($scope, $http, $element, $compile) {
         }).success(function (data) {
                 $scope.ajaxDone(data[0]);
                 if (data[0].url != null) {
-                    $scope.user_URL = data[0].url
+                    $scope.user_URL = data[0].url;
+                    $scope.logged = true;
                 }
             })
     }
@@ -90,6 +92,11 @@ function overallAppControler($scope, $http, $element, $compile) {
         //$element.replaceWith(newElement);
     }
 
+
+    $scope.hideUserData = function () {
+        $scope.is_user_data_shown = !$scope.is_user_data_shown;
+    }
+
     loadUserData();
     loadApps();
 }
@@ -103,8 +110,6 @@ function mainAppControler($scope, $http, $element, $compile) {
 
 function tableControll($scope, $http) {
 
-    $scope.is_user_data_shown = false;
-
     $scope.changeUserData = function () {
         $http({
             method: 'PUT',
@@ -113,9 +118,5 @@ function tableControll($scope, $http) {
         }).success(function (data) {
                 $scope.ajaxDone(data)
             });
-    }
-
-    $scope.hideUserData = function () {
-        $scope.is_user_data_shown = false;
     }
 }

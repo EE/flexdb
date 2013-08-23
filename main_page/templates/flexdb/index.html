@@ -24,9 +24,9 @@
         <div class="navbar">
             <div class="navbar-inner">
                 <ul class="nav">
-                    <li><a href="{% url 'socialauth_begin' 'google-oauth2' %}">Login</a></li>
-                    <li><a href="/logout/">Logout</a></li>
-                    <li><a>Change user data</a></li>
+                    <li><a ng-show = "!logged" href="{% url 'socialauth_begin' 'google-oauth2' %}">Login</a></li>
+                    <li><a ng-show = "logged" href="/logout/">Logout</a></li>
+                    <li><a ng-show = "logged" ng-click = hideUserData()>Change user data</a></li>
                 </ul>
             </div>
         </div>
