@@ -1,13 +1,26 @@
-<div ng-controller="tableControll">
-
-    <div>
-        <form ng-submit="changeUserData()">
-            User: <input type="text" ng-model="data.username"><br>
-            First name: <input type="text" ng-model="data.last_name"><br>
-            Last name: <input type="text" ng-model="data.first_name"><br>
-            Email: <input type="text" ng-model="data.email"><br>
-            <input class="btn-primary" type="submit" value="Apply changes" id="AddUserButton">
-        </form>
+<div ng-controller="tableControll" >
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>Change data</h3>
     </div>
 
+<form ng-submit="changeUserData()">
+    <div class="modal-body">
+
+        User: <input type="text" ng-model="data.username"><br>
+        First name: <input type="text" ng-model="data.last_name"><br>
+        Last name: <input type="text" ng-model="data.first_name"><br>
+        Email: <input type="text" ng-model="data.email"><br>
+    </div>
+
+
+    <div class="modal-footer">
+        <input class="btn-primary" type="submit" value="Apply changes" id="AddUserButton">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
+    </form>
 </div>
+
+
+
+

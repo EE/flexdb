@@ -33,7 +33,7 @@
                     <li><a class="hand-click" ng-show="!logged" href="{% url 'socialauth_begin' 'google-oauth2' %}">Login</a>
                     </li>
                     <li><a class="hand-click" ng-show="logged" href="/logout/">Logout</a></li>
-                    <li><a href="#changeUserDataModal" class="hand-click" data-toggle="modal" ng-show="logged">Change user data</a></li>
+                    <li><a class="hand-click" ng-click="showUserData()" data-toggle="modal" ng-show="logged">Change user data</a></li>
                     <li><a class="hand-click" ng-click="goToAppsList()">Go to apps list</a></li>
                 </ul>
             </div>
@@ -47,21 +47,12 @@
             </ul>
         </div>
 
-        <div ng-controller="mainAppControler">
-        </div>
+        <div ng-controller="mainAppControler"> </div>
 
-        <div id="changeUserDataModal" class="modal hide fade" tabindex="-1" role="dialog"
-             aria-labelledby="changeUserDataModalLabel" aria-hidden="true">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 id="changeUserDataModalLabel">Change data</h3>
-            </div>
-            <div class="modal-body">
-                <useredit></useredit>
-            </div>
-            <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-            </div>
+        <div  class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" ng-controller = modalControll>
+
+               <errorhandle errorname = "no error"></errorhandle>
+
         </div>
     </div>
 </div>

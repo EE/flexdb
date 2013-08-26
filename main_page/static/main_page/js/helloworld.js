@@ -1,5 +1,7 @@
 var app = angular.module("flexdb", []);
 var choosenApp;
+var showError;
+var showModal;
 
 app.config(function ($interpolateProvider, $httpProvider) {
     $interpolateProvider.startSymbol('[[');
@@ -14,6 +16,22 @@ app.directive("useredit", function () {
         templateUrl: "/accounts/useredit/",
         transclude: true
     };
+});
+
+app.directive("errorhandle", function () {
+    return {
+        restrict: "E",
+        scope: {
+            errorname: '@'
+        },
+        //TODO przeniesc do nowego folderu
+        template: '<div class="modal-header"> <button type="button" class="close" data-dismiss="modal"' +
+            ' aria-hidden="true">×</button> <h3>Error occured</h3>  </div>' +
+            '<div class = "modal-body"> Errror: {{ errorname }}, plese reload site. </div> ' +
+            '<div class="modal-footer" <button class="btn" data-dismiss="modal" aria-hidden="true"> Close ' +
+            '</button> </div>',
+        transclude: true
+    }
 });
 
 function overallAppControler($scope, $http, $element, $compile) {
@@ -64,6 +82,10 @@ function overallAppControler($scope, $http, $element, $compile) {
         $scope.applist = true;
     };
 
+    $scope.showUserData = function () {
+        showModal ("useredit");
+    }
+
     loadUserData();
 }
 
@@ -87,4 +109,27 @@ function tableControll($scope, $http) {
                 $scope.ajaxDone(data)
             });
     };
+}
+
+
+function modalControll($scope, $element, $compile) {
+
+    $scope.errorvalue = "loadin' assa sa";
+
+    showModal = function (el, attr) {
+        var newElement = $compile("<"+el+" "+ attr+">"+"</"+el+">")($scope);
+        $element.children(0).remove();
+        if(newElement != null) {
+            $element.append(newElement);
+            $element.modal('show');
+        }
+    };
+
+
+    showError = function (errorvalue) {
+        $scope.errorvalue = errorvalue;
+        showModal ('errorhandle', 'errorname = "'+ errorvalue +'"');
+    };
+
+    //showError ("cos cos cos");
 }
