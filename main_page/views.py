@@ -7,6 +7,7 @@ import json
 
 class Index(TemplateView):
     template_name = "flexdb/index.html"
+
     def get_context_data(self, **kwargs):
         context = super(Index, self).get_context_data(**kwargs)
         context['apps'] = settings.FLEXDB_APPS

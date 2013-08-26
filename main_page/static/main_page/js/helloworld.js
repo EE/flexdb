@@ -13,7 +13,7 @@ app.directive("useredit", function () {
         restrict: "AEC",
         templateUrl: "/accounts/useredit/",
         transclude: true
-    }
+    };
 });
 
 function overallAppControler($scope, $http, $element, $compile) {
@@ -37,7 +37,7 @@ function overallAppControler($scope, $http, $element, $compile) {
         if (data.email != null) {
             $scope.data.email = data.email;
         }
-    }
+    };
 
 
     function loadUserData() {
@@ -50,19 +50,19 @@ function overallAppControler($scope, $http, $element, $compile) {
                     $scope.user_URL = data[0].url;
                     $scope.logged = true;
                 }
-            })
+            });
     }
 
     $scope.appClick = function (appName) {
         var newElement = $compile("<"+appName+">"+"</"+appName+">")($scope);
         choosenApp(newElement);
         $scope.applist = false;
-    }
+    };
 
     $scope.goToAppsList = function () {
         choosenApp(null);
         $scope.applist = true;
-    }
+    };
 
     loadUserData();
 }
@@ -73,7 +73,7 @@ function mainAppControler($scope, $http, $element, $compile) {
         if(el != null) {
             $element.append(el);
         }
-    }
+    };
 }
 
 function tableControll($scope, $http) {
@@ -86,5 +86,5 @@ function tableControll($scope, $http) {
         }).success(function (data) {
                 $scope.ajaxDone(data)
             });
-    }
+    };
 }

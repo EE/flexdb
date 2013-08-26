@@ -14,5 +14,6 @@ class CustomUserViewSet(viewsets.ModelViewSet):
         user = self.request.user
         return self.model.objects.filter(id=user.id)
 
+
 def userEditView(request):
     return render(request, 'custom_user/custom_user.html', {})

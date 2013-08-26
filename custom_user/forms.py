@@ -1,6 +1,7 @@
 from django import forms
 from custom_user.models import CustomUser
 
+
 class UserCreationForm(forms.ModelForm):
     class Meta:
         model = CustomUser
