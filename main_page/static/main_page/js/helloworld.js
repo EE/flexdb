@@ -1,5 +1,5 @@
 var app = angular.module("flexdb", []);
-var choosenApp;
+var chosenApp;
 var showError;
 var showModal;
 
@@ -24,17 +24,12 @@ app.directive("errorhandle", function () {
         scope: {
             errorname: '@'
         },
-        //TODO przeniesc do nowego folderu
-        template: '<div class="modal-header"> <button type="button" class="close" data-dismiss="modal"' +
-            ' aria-hidden="true">×</button> <h3>Error occured</h3>  </div>' +
-            '<div class = "modal-body"> Errror: {{ errorname }}, plese reload site. </div> ' +
-            '<div class="modal-footer" <button class="btn" data-dismiss="modal" aria-hidden="true"> Close ' +
-            '</button> </div>',
+        templateUrl: "/error/",
         transclude: true
     }
 });
 
-function overallAppControler($scope, $http, $element, $compile) {
+function overallAppControler($scope, $http,  $compile) {
     $scope.apps = {};
     $scope.data = {};
     $scope.user_URL = "";
@@ -68,29 +63,32 @@ function overallAppControler($scope, $http, $element, $compile) {
                     $scope.user_URL = data[0].url;
                     $scope.logged = true;
                 }
-            });
+            }).error (function () {
+                showError ("Error occured with connection to the server, please load page again.")
+        });
     }
 
     $scope.appClick = function (appName) {
         var newElement = $compile("<"+appName+">"+"</"+appName+">")($scope);
-        choosenApp(newElement);
+        chosenApp(newElement);
         $scope.applist = false;
     };
 
     $scope.goToAppsList = function () {
-        choosenApp(null);
+        chosenApp(null);
         $scope.applist = true;
     };
 
     $scope.showUserData = function () {
         showModal ("useredit");
+        loadUserData();
     }
 
     loadUserData();
 }
 
-function mainAppControler($scope, $http, $element, $compile) {
-    choosenApp = function (el) {
+function mainAppControler($element) {
+    chosenApp = function (el) {
         $element.children(0).remove();
         if(el != null) {
             $element.append(el);
@@ -107,14 +105,14 @@ function tableControll($scope, $http) {
             data: angular.toJson($scope.data)
         }).success(function (data) {
                 $scope.ajaxDone(data)
-            });
+            }).error (function () {
+                showError ("Error occured with connection to the server, please load page again.")
+        });
     };
 }
 
 
 function modalControll($scope, $element, $compile) {
-
-    $scope.errorvalue = "loadin' assa sa";
 
     showModal = function (el, attr) {
         var newElement = $compile("<"+el+" "+ attr+">"+"</"+el+">")($scope);
@@ -127,9 +125,8 @@ function modalControll($scope, $element, $compile) {
 
 
     showError = function (errorvalue) {
-        $scope.errorvalue = errorvalue;
         showModal ('errorhandle', 'errorname = "'+ errorvalue +'"');
     };
 
-    //showError ("cos cos cos");
+    //showError ("test test test");
 }

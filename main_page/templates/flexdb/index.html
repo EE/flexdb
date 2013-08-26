@@ -8,6 +8,7 @@
         <script src="{% static 'main_page/js/vendor/bootstrap-2.3.2.js' %}"></script>
         <script src="{% static 'main_page/js/vendor/angular-1.1.5.js' %}"></script>
         <script src="{% static 'main_page/js/helloworld.js' %}"></script>
+        <script src="{% static 'main_page/js/helloworld.js' %}"></script>
         {% for x in apps %}
         <script src="{% static x|add:'/js/main.js' %}"></script>
         {% endfor %}
@@ -33,7 +34,8 @@
                     <li><a class="hand-click" ng-show="!logged" href="{% url 'socialauth_begin' 'google-oauth2' %}">Login</a>
                     </li>
                     <li><a class="hand-click" ng-show="logged" href="/logout/">Logout</a></li>
-                    <li><a class="hand-click" ng-click="showUserData()" data-toggle="modal" ng-show="logged">Change user data</a></li>
+                    <li><a class="hand-click" ng-click="showUserData()" data-toggle="modal" ng-show="logged">
+                        Change user data</a></li>
                     <li><a class="hand-click" ng-click="goToAppsList()">Go to apps list</a></li>
                 </ul>
             </div>
@@ -51,7 +53,7 @@
 
         <div  class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" ng-controller = modalControll>
 
-               <errorhandle errorname = "no error"></errorhandle>
+
 
         </div>
     </div>

@@ -17,3 +17,7 @@ class Index(TemplateView):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect('/')
+
+
+class ModalError(TemplateView):
+    template_name = "flexdb/modalerror.html"
