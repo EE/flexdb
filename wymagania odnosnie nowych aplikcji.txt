@@ -27,5 +27,9 @@ Wymagania dla css:
 Powinien być umieszczony w pliku
 "aplikacja"/static/"aplikacja"/css/main.css
 
+Ponadto
 W settings należy dodać nazwę aplikacji do listy:
 FLEXDB_APPS
+
+Informowanie klienta o błędach:
+wystarczy wywołać showError ("informacja o błędzie");

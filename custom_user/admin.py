@@ -12,14 +12,15 @@ class CustomUserAdmin(UserAdmin):
 
     fieldsets = (
         (None, {'fields': ('username', 'email', 'password', 'first_name', 'last_name')}),
-        )
+    )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'password', 'first_name', 'last_name', 'is_superuser', 'is_staff', 'is_active')}
-            ),
-        )
+            'fields': (
+                'username', 'email', 'password', 'first_name', 'last_name', 'is_superuser', 'is_staff', 'is_active')}),
+    )
 
     filter_horizontal = ()
+
 
 admin.site.register(CustomUser, CustomUserAdmin)
