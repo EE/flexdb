@@ -4,62 +4,67 @@
 <html>
 <head>
     {% compress js %}
-    <script src="{% static "flexdb/js/vendor/jquery-2.0.2.js" %}"></script>
-    <script src="{% static "flexdb/js/vendor/bootstrap-2.3.2.js" %}"></script>
-    <script src="{% static "flexdb/js/vendor/angular-1.1.5.js" %}"></script>
-    <script src="{% static "flexdb/js/helloworld.js" %}"></script>
+        <script src="{% static 'main_page/js/vendor/jquery-2.0.2.js' %}"></script>
+        <script src="{% static 'main_page/js/vendor/bootstrap-2.3.2.js' %}"></script>
+        <script src="{% static 'main_page/js/vendor/angular-1.1.5.js' %}"></script>
+        <script src="{% static 'main_page/js/helloworld.js' %}"></script>
+        {% for x in apps %}
+        <script src="{% static x|add:'/js/main.js' %}"></script>
+        {% endfor %}
     {% endcompress %}
 
     {% compress css %}
-    <link rel="stylesheet" href="{% static "flexdb/css/vendor/bootstrap-2.3.2.css" %}">
-    <link rel="stylesheet" href="{% static "flexdb/css/vendor/bootstrap-responsive-2.3.2.css" %}">
-    <link rel="stylesheet" href="{% static "flexdb/css/main.css" %}">
+        <link rel="stylesheet" href="{% static 'main_page/css/vendor/bootstrap-2.3.2.css' %}">
+        <link rel="stylesheet" href="{% static 'main_page/css/vendor/bootstrap-responsive-2.3.2.css' %}">
+        <link rel="stylesheet" href="{% static 'main_page/css/main.css' %}">
+        {% for x in apps %}
+        <link rel="stylesheet" href="{% static x|add:'/css/main.css' %}">
+        {% endfor %}
     {% endcompress %}
 
 </head>
 
 <body>
-
-<h3> Hello World!</h3>
-<a href="{% url 'socialauth_begin' 'google-oauth2' %}">Login</a>
-
-<div ng-app = "flexdb">
-
-    <div ng-controller = "tableControll">
-
-        <h3> Hello World!</h3>
-        <input class="btn-primary" type="submit" value="Change your data" ng-click="loadUserData()" ng-show="!is_user_data_shown">
-        <input class="btn-primary" type="submit" value="Finish changing" ng-click="hideUserData()" ng-show="is_user_data_shown">
-        <br /><br />
-        <div ng-show="is_user_data_shown">
-            <table>
-                <tr>
-                    <td>User</td>
-                    <td>First name</td>
-                    <td>Last name</td>
-                    <td>Email</td>
-                </tr>
-                <tr >
-                    <td>[[ user.username ]]</td>
-                    <td>[[ user.last_name ]]</td>
-                    <td>[[ user.first_name ]]</td>
-                    <td>[[ user.email ]]</td>
-                </tr>
-            </table>
-            <br>
-            <form ng-submit="changeUserData()">
-                User: <input type="text" ng-model="data.username"><br>
-                First name: <input type="text" ng-model="data.last_name"><br>
-                Last name: <input type="text" ng-model="data.first_name"><br>
-                Email: <input type="text" ng-model="data.email"><br>
-                <input class="btn-primary" type="submit" value="Change" id = "AddUserButton">
-            </form>
+<div ng-app="flexdb">
+    <div ng-controller="overallAppControler">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <ul class="nav">
+                    <li><a class="hand-click" ng-show="!logged" href="{% url 'socialauth_begin' 'google-oauth2' %}">Login</a>
+                    </li>
+                    <li><a class="hand-click" ng-show="logged" href="/logout/">Logout</a></li>
+                    <li><a href="#changeUserDataModal" class="hand-click" data-toggle="modal" ng-show="logged">Change user data</a></li>
+                    <li><a class="hand-click" ng-click="goToAppsList()">Go to apps list</a></li>
+                </ul>
+            </div>
         </div>
 
+        <div ng-show="applist">
+            <ul>
+                {% for x in apps %}
+                <li class="hand-click"><a ng-click="appClick('{{ x }}')">{{ x }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
 
+        <div ng-controller="mainAppControler">
+        </div>
+
+        <div id="changeUserDataModal" class="modal hide fade" tabindex="-1" role="dialog"
+             aria-labelledby="changeUserDataModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="changeUserDataModalLabel">Change data</h3>
+            </div>
+            <div class="modal-body">
+                <useredit></useredit>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            </div>
+        </div>
     </div>
 </div>
-
 </body>
 
 </html>

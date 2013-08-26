@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
+
 class CustomUserManager(BaseUserManager):
     def create_user(self, username=None, email=None, password=None):
         if not username:
@@ -20,6 +21,7 @@ class CustomUserManager(BaseUserManager):
         user.is_superuser = True
         user.save(using=self._db)
         return user
+
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     username = models.CharField("user name", max_length=127, unique=True)

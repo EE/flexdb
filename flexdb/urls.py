@@ -1,8 +1,10 @@
 from django.conf.urls import patterns, include, url
+from django.conf import settings
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
+
 
 urlpatterns = patterns('',
     # Examples:
@@ -17,3 +19,8 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('custom_user.urls')),
     url(r'', include('social_auth.urls')),
 )
+
+for x in settings.FLEXDB_APPS:
+    urlpatterns += patterns('',
+        url(r'^'+x+'/', include(x+'.urls')),
+    )
