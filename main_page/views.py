@@ -1,5 +1,5 @@
-from django.views.generic import TemplateView, View
-from django.http import HttpResponse, HttpResponseRedirect
+from django.views.generic import TemplateView
+from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
 from django.conf import settings
 import json
