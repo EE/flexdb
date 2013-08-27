@@ -1,11 +1,37 @@
 <div ng-controller = urlopownikControler>
-    <table class= urlopownik-menu>
+    <table class = urlopownik-global >
         <tr>
-            <td>
+            <td class = urlopownik-td-menu>
+                <div class = urlopownik-menu>
+                    <h4> Menu </h4>
+                    <a class="urlopownik-hand-click" ng-click="showMenu(0)">request</a><br>
+                    <a class="urlopownik-hand-click" ng-click="showMenu(1)">accepting</a><br>
+                    <a class="urlopownik-hand-click" ng-click="showMenu(2)">watching</a><br>
 
+                </div>
 
             </td>
-            <td>
+            <td class = urlopownik-td-site>
+                <div ng-show="show[0]">
+                    <form>
+                        From <input type="text" disabled ng-model="urlopownik.from"><br>
+                        To <input type="text" disabled ng-model="urlopownik.to"><br>
+                        Who will replace?
+                        <select>
+                            <option> aa</option>
+                            <option> bb</option>
+                            <option> cc</option>
+                        </select>
+                        <br>
+                        Reason <textarea ng-model="urlopownik.reason"> </textarea><br>
+                    </form>
+                </div>
+                <div ng-show="show[1]">
+                    b<br>b<br>b<br>b
+                </div>
+                <div ng-show="show[2]">
+                    c<br>c<br>c<br>c
+                </div>
 
 
             </td>

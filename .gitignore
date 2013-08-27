@@ -10,3 +10,4 @@ lib
 .Python
 CACHE/
 build/
+*.sass-cache
