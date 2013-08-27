@@ -2,22 +2,21 @@
   width: 100%;
 }
 .urlopownik-td-menu {
-  width: 100px;
+  width: 10%;
   vertical-align: top;
+
+  .urlopownik-td-site {
+    border: 1px solid #00d5d5;
+    padding: 4px 10px;
+  }
 }
 
-.urlopownik-td-site {
-
+.urlopownik-menu, .urlopownik-td-site-inside {
+  text-align:center;
 }
-
-.urlopownik-menu {
-
-}
-
 
 .urlopownik-global td {
-  padding: 4px 10px;
-  border: 1px solid #00d5d5;
+
 }
 
 .urlopownik-hand-click {

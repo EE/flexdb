@@ -5,32 +5,62 @@
                 <div class = urlopownik-menu>
                     <h4> Menu </h4>
                     <a class="urlopownik-hand-click" ng-click="showMenu(0)">request</a><br>
-                    <a class="urlopownik-hand-click" ng-click="showMenu(1)">accepting</a><br>
-                    <a class="urlopownik-hand-click" ng-click="showMenu(2)">watching</a><br>
+                    <a class="urlopownik-hand-click" ng-click="showMenu(1)">accept</a><br>
+                    <a class="urlopownik-hand-click" ng-click="showMenu(2)">watch</a><br>
 
                 </div>
 
             </td>
             <td class = urlopownik-td-site>
                 <div ng-show="show[0]">
-                    <form>
-                        From <input type="text" disabled ng-model="urlopownik.from"><br>
-                        To <input type="text" disabled ng-model="urlopownik.to"><br>
+
+                    <form ng-submit="applyForVacation()">
+                        <table>
+                        <tr>
+                            <td class = urlopownik-td-site-inside>
+                                <div ng-model="from">
+                                    <p><i> From [[from | date:'fullDate']]:</i></p>
+                                    <datepicker></datepicker>
+                                </div>
+                            </td>
+                            <td>
+                                <div ng-model="to">
+                                    <p><i> From [[to | date:'fullDate']]:</i></p>
+                                    <datepicker></datepicker>
+                                </div>
+                            </td>
+                        <tr>
+                        </table>
+
                         Who will replace?
-                        <select>
-                            <option> aa</option>
-                            <option> bb</option>
-                            <option> cc</option>
+                        <select ng-model="request.who" ng-options="c.name for c in client">
+
                         </select>
                         <br>
-                        Reason <textarea ng-model="urlopownik.reason"> </textarea><br>
+                        Reason <textarea ng-model="request.reason"> </textarea><br>
+                        <input class="btn-primary" type="submit" value="Apply for vacation">
                     </form>
                 </div>
                 <div ng-show="show[1]">
                     b<br>b<br>b<br>b
                 </div>
                 <div ng-show="show[2]">
-                    c<br>c<br>c<br>c
+                    <table>
+                        <tr>
+                            <th>
+                                <p>From</p>
+                            </th>
+                            <th>
+                                <p>To</p>
+                            </th>
+                            <th>
+                                <p>Reason</p>
+                            </th>
+                            <th>
+                                <p>Status</p>
+                            </th>
+                        <tr>
+                    </table>
                 </div>
 
 
