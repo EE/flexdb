@@ -41,7 +41,25 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def __unicode__(self):
         return self.username
 
+    def has_permisson(self, app_name, permission_name):
+        perm = UsersPermissions.objects.filter(user=self, app_name=app_name, permission_name=permission_name).count()
+        if perm > 0:
+            return True
+        return False
+
+    def add_permission(self, app_name, permission_name):
+        """ nalezy sprawdzic czy istnieje app i czy istnieje w niej dane pozwolenie
+        """
+        perm = UsersPermissions(user=self, app_name=app_name, permission_name=permission_name)
+        perm.save()
+
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
 
     objects = CustomUserManager()
+
+
+class UsersPermissions(models.Model):
+    user = models.ForeignKey(CustomUser)
+    app_name = models.CharField(max_length=127)
+    permission_name = models.CharField(max_length=127)
