@@ -45,22 +45,39 @@
                     b<br>b<br>b<br>b
                 </div>
                 <div ng-show="show[2]">
-                    <table>
-                        <tr>
-                            <th>
-                                <p>From</p>
-                            </th>
-                            <th>
-                                <p>To</p>
-                            </th>
-                            <th>
-                                <p>Reason</p>
-                            </th>
-                            <th>
-                                <p>Status</p>
-                            </th>
-                        <tr>
-                    </table>
+                    <div ng-controller = urlopownikWatchController>
+                        <table class = urlopownik-watch-table>
+                            <tr>
+                                <th>
+                                    <p>From</p>
+                                </th>
+                                <th>
+                                    <p>To</p>
+                                </th>
+                                <th>
+                                    <p>Reason</p>
+                                </th>
+                                <th>
+                                    <p>Status</p>
+                                </th>
+                            </tr>
+                            <tr ng-repeat="watch in watching">
+                                <td>
+                                    <p>[[watch.fromdate | date:'yyyy-MM-dd' ]] </p>
+                                </td>
+                                <td>
+                                    <p>[[watch.todate | date:'yyyy-MM-dd' ]]</p>
+                                </td>
+                                <td>
+                                    <p>[[watch.reason]]</p>
+                                </td>
+                                <td>
+                                    <p>[[watch.status]]</p>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
                 </div>
 
 
