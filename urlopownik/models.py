@@ -5,7 +5,7 @@ class Status(models.Model):
     status = models.CharField(max_length=30)
 
     def __unicode__(self):
-        return "%s " % self.status
+        return self.status
 
 
 class Vacation(models.Model):
@@ -18,5 +18,5 @@ class Vacation(models.Model):
     status = models.ManyToManyField(Status)
 
     def __unicode__(self):
-        return "from %s to %s status %s" % (self.fromdate, self.todate, self.user)
+        return "from {0} to {1} status {2}".format(self.fromdate, self.todate, self.user)
 

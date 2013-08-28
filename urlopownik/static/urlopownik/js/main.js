@@ -12,18 +12,13 @@ app.directive("urlopownik", function () {
 function urlopownikControler ($scope, $http) {
     $scope.show = [];
     $scope.request = {};
-    $scope.client = [
-        {name:"Ktos1", user:"User1"},
-        {name:"Ktos2", user:"User2"}
-    ];
+    $scope.client = [];
     $scope.request.who = $scope.client[0];
     $scope.request.reason = "reason";
     for (var i = 0; i < 3; i++){
         $scope.show[i]= false;
     }
 
-    // wynik zapytania
-    //$scope.result = "";
 
     $scope.from = new Date();
     $scope.to = new Date();
