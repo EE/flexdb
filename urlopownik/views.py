@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.views.generic import View, TemplateView
 import json
-from urlopownik.models import Vacation
+from urlopownik.models import Vacation, Status
 from custom_user.models import CustomUser
 from datetime import date
 
@@ -19,7 +19,8 @@ class UrlopownikAdd(View):
             fromdate = date(int(data["fromyear"]), int(data["frommonth"]), int(data["fromday"]))
             todate = date(int(data["toyear"]), int(data["tomonth"]), int(data["today"]))
             user = CustomUser.objects.get(username=request.user.username)
-            add = Vacation(user=user, fromdate=fromdate, todate=todate, reason=data["reason"])
+            status = Status.objects.get(pk=1)
+            add = Vacation(user=user, fromdate=fromdate, todate=todate, reason=data["reason"], status=status)
             add.save()
 
         return HttpResponse(

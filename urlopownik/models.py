@@ -15,7 +15,7 @@ class Vacation(models.Model):
     todate = models.DateField()
     #who will take place....
     reason = models.TextField()
-    status = models.ManyToManyField(Status)
+    status = models.ForeignKey(Status)
 
     def __unicode__(self):
         return "from {0} to {1} status {2}".format(self.fromdate, self.todate, self.user)

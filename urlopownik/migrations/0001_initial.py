@@ -18,21 +18,13 @@ class Migration(SchemaMigration):
         # Adding model 'Vacation'
         db.create_table(u'urlopownik_vacation', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['custom_user.CustomUser'], unique=True)),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['custom_user.CustomUser'])),
             ('fromdate', self.gf('django.db.models.fields.DateField')()),
             ('todate', self.gf('django.db.models.fields.DateField')()),
             ('reason', self.gf('django.db.models.fields.TextField')()),
+            ('status', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['urlopownik.Status'])),
         ))
         db.send_create_signal(u'urlopownik', ['Vacation'])
-
-        # Adding M2M table for field status on 'Vacation'
-        m2m_table_name = db.shorten_name(u'urlopownik_vacation_status')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('vacation', models.ForeignKey(orm[u'urlopownik.vacation'], null=False)),
-            ('status', models.ForeignKey(orm[u'urlopownik.status'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['vacation_id', 'status_id'])
 
 
     def backwards(self, orm):
@@ -41,9 +33,6 @@ class Migration(SchemaMigration):
 
         # Deleting model 'Vacation'
         db.delete_table(u'urlopownik_vacation')
-
-        # Removing M2M table for field status on 'Vacation'
-        db.delete_table(db.shorten_name(u'urlopownik_vacation_status'))
 
 
     models = {
@@ -92,9 +81,9 @@ class Migration(SchemaMigration):
             'fromdate': ('django.db.models.fields.DateField', [], {}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'reason': ('django.db.models.fields.TextField', [], {}),
-            'status': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['urlopownik.Status']", 'symmetrical': 'False'}),
+            'status': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['urlopownik.Status']"}),
             'todate': ('django.db.models.fields.DateField', [], {}),
-            'user': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['custom_user.CustomUser']", 'unique': 'True'})
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['custom_user.CustomUser']"})
         }
     }
 
