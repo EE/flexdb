@@ -2,7 +2,6 @@ from django.views.generic import TemplateView, View
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import logout
 from django.conf import settings
-from flexdb.utils import get_settings
 
 
 class Index(TemplateView):
