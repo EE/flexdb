@@ -35,7 +35,6 @@ class UrlopownikWatch(View):
             user = CustomUser.objects.get(username=request.user.username)
             vacations = Vacation.objects.filter(user=user)
 
-            print vacations[0].fromdate.day, vacations[0].fromdate.month, vacations[0].fromdate.year
             return HttpResponse(
                 json.dumps({
                     "reason": dict([(x, vacations[x].reason) for x in range(0, len(vacations))]),
@@ -57,9 +56,3 @@ class UrlopownikWatch(View):
             )
 
 
-'''
-                "from": dict([(x, {vacations[x].fromdate.day, vacations[x].fromdate.month, vacations[x].fromdate.year})
-                              for x in range(0, len(vacations))]),
-                "to": dict([(x, {vacations[x].todate.day, vacations[x].todate.month, vacations[x].todate.year})
-                            for x in range(0, len(vacations))]),
-                        '''
