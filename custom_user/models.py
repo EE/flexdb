@@ -52,7 +52,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         """ returns True only if adding was successful
         """
         config = get_settings(app_name)
-        if config is None or config.permissions not contains permission_name:
+        if config is None or permission_name not in config.permissions:
             return False
         perm = UsersPermissions(user=self, app_name=app_name, permission_name=permission_name)
         perm.save()
