@@ -47,19 +47,19 @@ class Config(object):
 
     def js(self):
         js_list = []
-        for prefix, suffixes in self.static_files['js']:
+        for prefix, suffixes in self.static_files['js'].iteritems():
             js_list += [prefix + suffix for suffix in suffixes]
         return js_list
 
     def css(self):
         css_list = []
-        for prefix, suffixes in self.static_files['css']:
+        for prefix, suffixes in self.static_files['css'].iteritems():
             css_list += [prefix + suffix for suffix in suffixes]
         return css_list
 
-    def tmplates(self):
+    def templates(self):
         template_list = []
-        for prefix, suffixes in self.static_files['html']:
+        for prefix, suffixes in self.static_files['html'].iteritems():
             template_list += [prefix + suffix for suffix in suffixes]
         return template_list
 

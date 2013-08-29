@@ -3,23 +3,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    {% compress js %}
-        <script src="{% static 'main_page/js/vendor/jquery-2.0.2.js' %}"></script>
-        <script src="{% static 'main_page/js/vendor/bootstrap-2.3.2.js' %}"></script>
-        <script src="{% static 'main_page/js/vendor/angular-1.1.5.js' %}"></script>
-        <script src="{% static 'main_page/js/helloworld.js' %}"></script>
-        <script src="{% static 'main_page/js/helloworld.js' %}"></script>
-        {% for x in apps %}
-        <script src="{% static x|add:'/js/main.js' %}"></script>
+
+        <script type="text/javascript" src="{% static 'main_page/js/vendor/jquery-2.0.2.js' %}"></script>
+        <script type="text/javascript" src="{% static 'main_page/js/vendor/bootstrap-2.3.2.js' %}"></script>
+        <script type="text/javascript" src="{% static 'main_page/js/vendor/angular-1.1.5.js' %}"></script>
+        <script type="text/javascript" src="{% static 'main_page/js/helloworld.js' %}"></script>
+        <script type="text/javascript">
+            var templates_dict = {};
+            {% for x, y in templates.items %}
+                templates_dict.{{ x }} = [];
+                {% for templ in y %}
+                    templates_dict.{{ x }} += '{% static templ %}';
+                {% endfor %}
+            {% endfor %}
+        </script>
+        {% for x in js %}
+        <script type="text/javascript" src="{% static x %}"></script>
         {% endfor %}
-    {% endcompress %}
+
 
     {% compress css %}
-        <link rel="stylesheet" href="{% static 'main_page/css/vendor/bootstrap-2.3.2.css' %}">
-        <link rel="stylesheet" href="{% static 'main_page/css/vendor/bootstrap-responsive-2.3.2.css' %}">
-        <link rel="stylesheet" href="{% static 'main_page/css/main.css' %}">
-        {% for x in apps %}
-        <link rel="stylesheet" href="{% static x|add:'/css/main.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'main_page/css/vendor/bootstrap-2.3.2.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'main_page/css/vendor/bootstrap-responsive-2.3.2.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'main_page/css/main.css' %}">
+        {% for x in css %}
+        <link rel="stylesheet" type="text/css" href="{% static x %}">
         {% endfor %}
     {% endcompress %}
 
