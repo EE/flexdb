@@ -7,6 +7,10 @@ from django.db import models
 
 class Migration(SchemaMigration):
 
+    needed_by = (
+        ("social_auth", "0001_initial"),
+    )
+
     def forwards(self, orm):
         # Adding model 'CustomUser'
         db.create_table(u'custom_user_customuser', (
