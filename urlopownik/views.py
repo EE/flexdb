@@ -70,7 +70,46 @@ class UrlopownikAcceptstatus(View):
             )
 
 
+class UrlopownikAcceptfind(View):
+    """
+    Wyszukiwarka prosb o urlop
+
+    """
+    def post(self, request):
+
+        #TODO zamienic na uprawnienia accept a nie na logowanie, po merge Borysa
+        if request.user.is_authenticated:
+            data = json.loads(request.body)
+            status = Status.objects.filter(status=data.search.status)
+            vacations = Vacation.objects.filter(status=status)
+
+            return HttpResponse(
+                json.dumps({
+                    "reason": dict([(x, vacations[x].reason) for x in range(0, len(vacations))]),
+                    "fromday": dict([(x, vacations[x].fromdate.day)
+                                     for x in range(0, len(vacations))]),
+                    "today": dict([(x, vacations[x].todate.day)
+                                   for x in range(0, len(vacations))]),
+                    "frommonth": dict([(x, vacations[x].fromdate.month)
+                                       for x in range(0, len(vacations))]),
+                    "tomonth": dict([(x, vacations[x].todate.month)
+                                     for x in range(0, len(vacations))]),
+                    "fromyear": dict([(x, vacations[x].fromdate.year)
+                                      for x in range(0, len(vacations))]),
+                    "toyear": dict([(x, vacations[x].todate.year)
+                                    for x in range(0, len(vacations))]),
+                    "length": len(vacations)
+                }),
+                content_type="application/json"
+            )
+
+
 class UrlopownikGetUsers(View):
+    """
+    Akceptowanie/lub odrzucanie prosb o urlop
+
+    """
+
     def post(self, request):
 
         #TODO zamienic na uprawnienia accept a nie na logowanie, po merge Borysa

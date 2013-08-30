@@ -46,16 +46,19 @@
                 </div>
                 <div ng-show="show[1]">
                     <div ng-controller = urlopownikAcceptController>
-                        <select>
+                        <select ng-model = "search.status">
                             <option ng-repeat="s in statuses">
                                 [[s]]
                             </option>
                         </select>
                         &nbsp;
-                        <button class="btn-primary" ng-submit= "UrlopownikFind()"> Find </button>
+                        <button class="btn-primary" ng-click= "UrlopownikFind()"> Find </button>
 
                         <table>
                             <tr>
+                                <th>
+                                    <p>User</p>
+                                </th>
                                 <th>
                                     <p>From</p>
                                 </th>
@@ -63,7 +66,7 @@
                                     <p>To</p>
                                 </th>
                                 <th>
-                                    <p>Who</p>
+                                    <p>Who replace</p>
                                 </th>
                                 <th>
                                     <p>Reason</p>
@@ -72,16 +75,16 @@
                                     <p>Accept</p>
                                 </th>
                             </tr>
-                            <tr ng-repeat="accept in accepting">
+                            <tr ng-repeat="f in find">
                                 <td>
-                                    <p>[[accept.fromdate]]</p>
+                                    <p>[[f.fromdate]]</p>
                                 </td>
                                 <td>
-                                    <p>[[accept.todate]]</p>
+                                    <p>[[f.todate]]</p>
                                 </td>
                                 <td>
                                     <!-- obciecie -->
-                                    <p>[[accept.reason]]</p>
+                                    <p>[[f.reason]]</p>
                                 </td>
                                 <td>
                                     <!-- button-->
