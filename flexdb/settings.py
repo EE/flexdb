@@ -125,6 +125,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 FLEXDB_APPS = (
     'pusta1',
     'pusta2',
+    'urlopownik'
 )
 
 INSTALLED_APPS = (
