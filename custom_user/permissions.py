@@ -7,7 +7,6 @@ class IsOwner(BasePermission):
         """ czy tu nie brakuje:
         if request.user.is_superuser:
             return True
-        nalezy dodac sprawdzanie pozwolenia usera do edycji
         """
 
         if request.method == "DELETE":
