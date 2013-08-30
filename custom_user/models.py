@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from flexdb.utils import get_config, PermissionExeption
 
 
 class CustomUserManager(BaseUserManager):
@@ -41,7 +42,26 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def __unicode__(self):
         return self.username
 
+    def has_permisson(self, app_name, permission_name):
+        perm = UsersPermissions.objects.filter(user=self, app_name=app_name, permission_name=permission_name).count()
+        if perm > 0:
+            return True
+        return False
+
+    def add_permission(self, app_name, permission_name):
+        config = get_config(app_name)
+        if not config.has_permission(permission_name):
+            raise PermissionExeption(app_name, permission_name)
+        perm = UsersPermissions(user=self, app_name=app_name, permission_name=permission_name)
+        perm.save()
+
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
 
     objects = CustomUserManager()
+
+
+class UsersPermissions(models.Model):
+    user = models.ForeignKey(CustomUser)
+    app_name = models.CharField(max_length=127)
+    permission_name = models.CharField(max_length=127)

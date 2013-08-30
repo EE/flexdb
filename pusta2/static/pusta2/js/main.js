@@ -1,7 +1,7 @@
 app.directive("pusta2", function () {
     return {
         restrict: "E",
-        templateUrl: "../../../pusta2/templates/pusta2/index.html",
+        templateUrl: templates_dict['pusta2'],
         transclude: true
     }
 });
