@@ -7,7 +7,7 @@
         <script type="text/javascript" src="{% static 'main_page/js/vendor/jquery-2.0.2.js' %}"></script>
         <script type="text/javascript" src="{% static 'main_page/js/vendor/bootstrap-2.3.2.js' %}"></script>
         <script type="text/javascript" src="{% static 'main_page/js/vendor/angular-1.1.5.js' %}"></script>
-        <script type="text/javascript" src="{% static 'main_page/js/vendor/ui-bootstrap-tpls-0.5.0.js' %}"></script>
+        <script src="{% static 'main_page/js/vendor/ui-bootstrap-tpls-0.5.0.js' %}"></script>
         <script type="text/javascript" src="{% static 'main_page/js/helloworld.js' %}"></script>
         <script type="text/javascript">
             var templates_dict = {};
@@ -20,6 +20,7 @@
         </script>
         {% for x in js %}
         <script type="text/javascript" src="{% static x %}"></script>
+
         {% endfor %}
     {% endcompress %}
 
@@ -61,6 +62,8 @@
         <div ng-controller="mainAppControler"> </div>
 
         <div  class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" ng-controller = modalControll>
+
+
 
         </div>
     </div>

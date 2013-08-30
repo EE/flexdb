@@ -14,6 +14,8 @@
             <td class = urlopownik-td-site>
                 <div ng-show="show[0]">
                     <div ng-controller = urlopownikRequestController>
+                        <p ng-show = sendrequest>  Your request was sent successfully.</p>
+                        <p ng-show = failedrequest> Your request wasn't sent.</p>
                         <form ng-submit="applyForVacation()">
                             <table>
                             <tr>

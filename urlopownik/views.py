@@ -56,7 +56,7 @@ class UrlopownikWatch(View):
 class UrlopownikAcceptstatus(View):
     def get(self, request):
 
-        #TODO zamienic na uprawnienia Admina a nie na logowanie, po merge Borysa
+        #TODO zamienic na uprawnienia accept a nie na logowanie, po merge Borysa
         if request.user.is_authenticated:
             status = Status.objects.all()
             statuses = []
@@ -68,3 +68,21 @@ class UrlopownikAcceptstatus(View):
                 }),
                 content_type="application/json"
             )
+
+
+class UrlopownikGetUsers(View):
+    def post(self, request):
+
+        #TODO zamienic na uprawnienia accept a nie na logowanie, po merge Borysa
+        if request.user.is_authenticated:
+            status = Status.objects.all()
+            statuses = []
+            for x in status:
+                statuses.append(x.status)
+            return HttpResponse(
+                json.dumps({
+                    "status": statuses
+                }),
+                content_type="application/json"
+            )
+

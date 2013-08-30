@@ -1,6 +1,4 @@
-var UrlopownikstartWatch;
-var UrlopownikstartAccept; //promiss + przeladowanie  z uprawnieniami
-
+var Urlopownikstart = [];
 app.directive("urlopownik", function () {
     return {
         restrict: "E",
@@ -20,13 +18,9 @@ function urlopownikControler ($scope) {
         for (var i = 0; i < $scope.show.length; i++){
             $scope.show[i]= false;
         }
+        Urlopownikstart[elementtoshow] ();
         $scope.show[elementtoshow]= true;
-        if (elementtoshow === 2) {
-            UrlopownikstartWatch ();
-        }
-        if (elementtoshow === 1) {
-            UrlopownikstartAccept ();
-        }
+
     }
 }
 
@@ -40,6 +34,14 @@ function urlopownikRequestController ($scope, $http) {
     $scope.request.reason = "reason";
     $scope.from = new Date();
     $scope.to = new Date();
+    $scope.sendrequest = false;
+    $scope.failedrequest = false;
+
+    Urlopownikstart[0] = function () {
+        $scope.sendrequest = false;
+        $scope.failedrequest = false;
+    }
+
 
     $scope.applyForVacation = function () {
         if (($scope.to < $scope.from) || ($scope.from < new Date())) {
@@ -56,8 +58,14 @@ function urlopownikRequestController ($scope, $http) {
                 url: '/urlopownik/add/',
                 data: angular.toJson($scope.request)
             }).success(function (data) {
-                //Przekierowanie lub komunikat
+                if (data.ok === true){
+                        $scope.sendrequest = true;
+                        $scope.failedrequest = false;
 
+                    } else {
+                        $scope.sendrequest = false;
+                        $scope.failedrequest = true;
+                    }
                 }).error (function () {
                     showError ("Error occured with connection to the server, please load page again.")
             });
@@ -74,7 +82,7 @@ function urlopownikAcceptController ($scope, $http) {
     $scope.statuses = [];
 
     //uruchamiane do zobaczenia z roznym statusem!!!
-    UrlopownikstartAccept = function () {
+    Urlopownikstart[1] = function () {
         $http({
             method: 'GET',
             url: '/urlopownik/acceptstatus/'
@@ -124,7 +132,7 @@ function urlopownikWatchController ($scope, $http) {
 
     $scope.watching = [];
 
-    UrlopownikstartWatch = function () {
+    Urlopownikstart[2] = function () {
         $http({
             method: 'GET',
             url: '/urlopownik/watch/'
