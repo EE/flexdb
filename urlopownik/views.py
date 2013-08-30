@@ -11,7 +11,7 @@ class Urlopownik(TemplateView):
 
 
 class UrlopownikAdd(View):
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         ok = False
         if request.user.is_authenticated:
             ok = True
@@ -30,7 +30,7 @@ class UrlopownikAdd(View):
 
 
 class UrlopownikWatch(View):
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
 
         if request.user.is_authenticated:
             user = CustomUser.objects.get(username=request.user.username)
@@ -57,3 +57,18 @@ class UrlopownikWatch(View):
             )
 
 
+class UrlopownikAcceptstatus(View):
+    def get(self, request):
+
+        #TODO zamienic na uprawnienia Admina a nie na logowanie, po merge Borysa
+        if request.user.is_authenticated:
+            status = Status.objects.all()
+            statuses = []
+            for x in status:
+                statuses.append(x.status)
+            return HttpResponse(
+                json.dumps({
+                    "status": statuses
+                }),
+                content_type="application/json"
+            )
