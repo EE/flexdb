@@ -46,6 +46,14 @@
                 </div>
                 <div ng-show="show[1]">
                     <div ng-controller = urlopownikAcceptController>
+                        <select>
+                            <option ng-repeat="s in statuses">
+                                [[s]]
+                            </option>
+                        </select>
+                        &nbsp;
+                        <button class="btn-primary" ng-submit= "UrlopownikFind()"> Find </button>
+
                         <table>
                             <tr>
                                 <th>

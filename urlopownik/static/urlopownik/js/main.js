@@ -81,6 +81,7 @@ function urlopownikAcceptController ($scope, $http) {
     $scope.accepting = [];
     $scope.statuses = [];
 
+
     //uruchamiane do zobaczenia z roznym statusem!!!
     Urlopownikstart[1] = function () {
         $http({
@@ -112,7 +113,10 @@ function urlopownikAcceptController ($scope, $http) {
         });
     }
 
+    $scope.UrlopownikFind = function () {
 
+
+    }
     $scope.UrlopownikAccept = function () {
         $http({
             method: 'POST',
