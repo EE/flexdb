@@ -80,12 +80,13 @@ class UrlopownikAcceptfind(View):
         #TODO zamienic na uprawnienia accept a nie na logowanie, po merge Borysa
         if request.user.is_authenticated:
             data = json.loads(request.body)
-            status = Status.objects.filter(status=data.search.status)
+            status = Status.objects.filter(status=data['searchstatus'].split()[0])
             vacations = Vacation.objects.filter(status=status)
 
             return HttpResponse(
                 json.dumps({
                     "reason": dict([(x, vacations[x].reason) for x in range(0, len(vacations))]),
+                    "user": dict([(x, vacations[x].user.username) for x in range(0, len(vacations))]),
                     "fromday": dict([(x, vacations[x].fromdate.day)
                                      for x in range(0, len(vacations))]),
                     "today": dict([(x, vacations[x].todate.day)

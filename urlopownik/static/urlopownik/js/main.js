@@ -76,12 +76,12 @@ function urlopownikAcceptController ($scope, $http) {
     $scope.accepting = [];
     $scope.statuses = [];
     $scope.search = {};
+    $scope.searchstatus;
     $scope.find = [];
 
 
     //uruchamiane do zobaczenia z roznym statusem!!!
     Urlopownikstart[1] = function () {
-        console.log ($scope.search);
         $http({
             method: 'GET',
             url: '/urlopownik/acceptstatus/'
@@ -96,7 +96,7 @@ function urlopownikAcceptController ($scope, $http) {
         $http({
             method: 'POST',
             url: '/urlopownik/acceptfind/',
-            data: angular.toJson({search: $scope.search})
+            data: angular.toJson({searchstatus: $scope.searchstatus})
         }).success(function (data) {
             $scope.find = []
             var fromdate;
@@ -104,7 +104,13 @@ function urlopownikAcceptController ($scope, $http) {
             for (var i = 0; i < parseInt(data.length); i++) {
                 fromdate = new Date(data.fromyear[i], data.frommonth[i], data.fromday[i]);
                 todate = new Date(data.toyear[i], data.tomonth[i], data.today[i]);
-                $scope.find.push({fromdate: fromdate, todate: todate, status: "undefined", reason: data.reason[i]});
+                $scope.find.push({
+                    fromdate: fromdate,
+                    todate: todate,
+                    status: "undefined",
+                    reason: data.reason[i],
+                    user: data.user[i]
+                });
             }
         }).error (function () {
             showError ("Error occured with connection to the server, please load page again.")
@@ -113,7 +119,7 @@ function urlopownikAcceptController ($scope, $http) {
     };
 
 
-    $scope.UrlopownikAccept = function () {
+    $scope.UrlopownikAccept = function (number) {
         $http({
             method: 'POST',
             url: '/urlopownik/accept/',

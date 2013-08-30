@@ -46,15 +46,16 @@
                 </div>
                 <div ng-show="show[1]">
                     <div ng-controller = urlopownikAcceptController>
-                        <select ng-model = "search.status">
+                        <div>
+                        <select ng-model = "searchstatus">
                             <option ng-repeat="s in statuses">
                                 [[s]]
                             </option>
                         </select>
                         &nbsp;
-                        <button class="btn-primary" ng-click= "UrlopownikFind()"> Find </button>
-
-                        <table>
+                        <a ng-click= "UrlopownikFind()"> Find </a>
+                        </div>
+                        <table class="urlopownik-watch-table">
                             <tr>
                                 <th>
                                     <p>User</p>
@@ -72,22 +73,34 @@
                                     <p>Reason</p>
                                 </th>
                                 <th>
-                                    <p>Accept</p>
+                                    <p>Status</p>
+                                </th>
+                                <th>
+                                    <p>Change</p>
                                 </th>
                             </tr>
                             <tr ng-repeat="f in find">
                                 <td>
-                                    <p>[[f.fromdate]]</p>
+                                    <p>[[ f.user ]]</p>
                                 </td>
                                 <td>
-                                    <p>[[f.todate]]</p>
+                                    <p>[[f.fromdate | date:'fullDate']]</p>
+                                </td>
+                                <td>
+                                    <p>[[f.todate | date:'fullDate']]</p>
+                                </td>
+                                <td>
+                                    <!-- who-->
                                 </td>
                                 <td>
                                     <!-- obciecie -->
                                     <p>[[f.reason]]</p>
                                 </td>
                                 <td>
-                                    <!-- button-->
+                                    <!-- Status -->
+                                </td>
+                                <td>
+                                    <!-- button akcji -->
                                 </td>
                             </tr>
                         </table>
