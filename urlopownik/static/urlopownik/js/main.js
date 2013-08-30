@@ -78,7 +78,7 @@ function urlopownikAcceptController ($scope, $http) {
     $scope.search = {};
     $scope.searchstatus;
     $scope.find = [];
-
+    $scope.statusval = [];
 
     //uruchamiane do zobaczenia z roznym statusem!!!
     Urlopownikstart[1] = function () {
@@ -98,18 +98,21 @@ function urlopownikAcceptController ($scope, $http) {
             url: '/urlopownik/acceptfind/',
             data: angular.toJson({searchstatus: $scope.searchstatus})
         }).success(function (data) {
-            $scope.find = []
+            $scope.find = [];
+            $scope.statusval = [];
             var fromdate;
             var todate;
             for (var i = 0; i < parseInt(data.length); i++) {
                 fromdate = new Date(data.fromyear[i], data.frommonth[i], data.fromday[i]);
                 todate = new Date(data.toyear[i], data.tomonth[i], data.today[i]);
+                $scope.statusval[data.pk[i]] = data.status;
                 $scope.find.push({
                     fromdate: fromdate,
                     todate: todate,
-                    status: "undefined",
+                    status: data.status,
                     reason: data.reason[i],
-                    user: data.user[i]
+                    user: data.user[i],
+                    pk: data.pk[i]
                 });
             }
         }).error (function () {
@@ -119,13 +122,17 @@ function urlopownikAcceptController ($scope, $http) {
     };
 
 
-    $scope.UrlopownikAccept = function (number) {
+    $scope.UrlopownikChange = function (number, it) {
         $http({
             method: 'POST',
-            url: '/urlopownik/accept/',
-            data: angular.toJson({cos: "cos"})
+            url: '/urlopownik/changestatus/',
+            data: angular.toJson({
+                status: $scope.statusval [number],
+                pk: number
+            })
         }).success(function (data) {
-
+                //if ok i czy sie zmienilo
+            $scope.find.splice( it, 1 );
         }).error (function () {
             showError ("Error occured with connection to the server, please load page again.")
         });

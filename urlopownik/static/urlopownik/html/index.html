@@ -98,9 +98,14 @@
                                 </td>
                                 <td>
                                     <!-- Status -->
+                                    <select ng-model = "statusval[ [[f.pk ]] ]">
+                                    <option ng-repeat="s in statuses">
+                                        [[s]]
+                                    </option>
+                                    </select>
                                 </td>
                                 <td>
-                                    <!-- button akcji -->
+                                    <a ng-click = "UrlopownikChange( [[f.pk]] , $index )"> Change </a>
                                 </td>
                             </tr>
                         </table>

@@ -87,6 +87,7 @@ class UrlopownikAcceptfind(View):
                 json.dumps({
                     "reason": dict([(x, vacations[x].reason) for x in range(0, len(vacations))]),
                     "user": dict([(x, vacations[x].user.username) for x in range(0, len(vacations))]),
+                    "pk": dict([(x, vacations[x].pk) for x in range(0, len(vacations))]),
                     "fromday": dict([(x, vacations[x].fromdate.day)
                                      for x in range(0, len(vacations))]),
                     "today": dict([(x, vacations[x].todate.day)
@@ -99,30 +100,27 @@ class UrlopownikAcceptfind(View):
                                       for x in range(0, len(vacations))]),
                     "toyear": dict([(x, vacations[x].todate.year)
                                     for x in range(0, len(vacations))]),
-                    "length": len(vacations)
+                    "length": len(vacations),
+                    "status": data['searchstatus'].split()[0]
                 }),
                 content_type="application/json"
             )
 
 
-class UrlopownikGetUsers(View):
+class UrlopownikChangeStatus(View):
     """
     Akceptowanie/lub odrzucanie prosb o urlop
 
     """
-
     def post(self, request):
-
         #TODO zamienic na uprawnienia accept a nie na logowanie, po merge Borysa
         if request.user.is_authenticated:
-            status = Status.objects.all()
-            statuses = []
-            for x in status:
-                statuses.append(x.status)
+            data = json.loads(request.body)
+            status = Status.objects.filter(status=data['status'].split()[0])
+            vacations = Vacation.objects.get(pk=data['pk'])
+            vacations.status = status[0]
+            vacations.save()
             return HttpResponse(
-                json.dumps({
-                    "status": statuses
-                }),
                 content_type="application/json"
             )
 
