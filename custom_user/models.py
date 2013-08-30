@@ -65,3 +65,6 @@ class UsersPermissions(models.Model):
     user = models.ForeignKey(CustomUser)
     app_name = models.CharField(max_length=127)
     permission_name = models.CharField(max_length=127)
+
+    def __unicode__(self):
+        return "{}, {}, {}".format(self.user.username, self.app_name, self.permission_name)

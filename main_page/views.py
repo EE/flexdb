@@ -14,6 +14,7 @@ class Index(TemplateView):
         context['js'] = []
         context['css'] = []
         context['templates'] = {}
+        context['permissions'] = {}
         for x in context['apps']:
             config = get_config(x)
             context['js'] += config.js()

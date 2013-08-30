@@ -29,6 +29,14 @@ app.directive("errorhandle", function () {
     }
 });
 
+app.directive("editperm", function () {
+    return {
+        restrict: "E",
+        templateUrl: "",
+        transclude: true
+    }
+});
+
 function overallAppControler($scope, $http, $compile) {
     $scope.apps = {};
     $scope.data = {};
@@ -131,6 +139,4 @@ function modalControll($scope, $element, $compile) {
     showError = function (errorvalue) {
         showModal('errorhandle', 'errorname = "' + errorvalue + '"');
     };
-
-    //showError ("test test test");
 }

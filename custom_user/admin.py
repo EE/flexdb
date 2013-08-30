@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from custom_user.models import CustomUser
+from custom_user.models import CustomUser, UsersPermissions
 from custom_user.forms import UserCreationForm
 
 
@@ -24,3 +24,4 @@ class CustomUserAdmin(UserAdmin):
 
 
 admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(UsersPermissions)
