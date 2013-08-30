@@ -6,10 +6,6 @@ from custom_user.models import CustomUser
 from datetime import date
 
 
-class Urlopownik(TemplateView):
-    template_name = "urlopownik/index.html"
-
-
 class UrlopownikAdd(View):
     def post(self, request):
         ok = False

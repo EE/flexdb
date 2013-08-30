@@ -4,7 +4,7 @@ var UrlopownikstartAccept; //promiss + przeladowanie  z uprawnieniami
 app.directive("urlopownik", function () {
     return {
         restrict: "E",
-        templateUrl: "/urlopownik/",
+        templateUrl: templates_dict['urlopownik'],
         transclude: true
     }
 });
