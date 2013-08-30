@@ -1,4 +1,3 @@
-from httplib2 import Http
 from rest_framework import viewsets
 from custom_user.serializers import CustomUserSerializer
 from custom_user.models import CustomUser
@@ -18,10 +17,10 @@ class CustomUserViewSet(viewsets.ModelViewSet):
 
 
 def userEditView(request):
-    return render(request, 'custom_user/custom_user.html', {})
-
-
-def changePermissionsView(request):
-    if request.user.has_permission('custom_user', 'permissions'):
-        return render(request, 'custom_user/edit_perm.heml', {})
-    return HttpResponse()
+    if request.user.is_authenticated():
+        data = {}
+        data['users'] = CustomUser.objects.all()#only("username", "first_name", "last_name", "email")
+        data['edit'] = request.user.has_permission('custom_user', 'edit')
+        data['perm'] = request.user.has_permission('custom_user', 'permissions')
+        return render(request, 'custom_user/custom_user.html', data)
+    return HttpResponse("")

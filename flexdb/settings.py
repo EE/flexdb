@@ -123,6 +123,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 FLEXDB_APPS = (
+    'custom_user',
     'pusta1',
     'pusta2',
 )
@@ -143,7 +144,6 @@ INSTALLED_APPS = (
     'social_auth',
     # components
     'main_page',
-    'custom_user',
 ) + FLEXDB_APPS
 
 # A sample logging configuration. The only tangible logging

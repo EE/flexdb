@@ -1,4 +1,4 @@
-<div ng-controller="tableControll" >
+<div ng-controller="tableControll" hidden>
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3>Change data</h3>
@@ -17,11 +17,29 @@
 
         <form ng-submit="changeUserData()">
         <input class="btn-primary" type="submit" value="Apply changes" id="AddUserButton">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
         </form>
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
     </div>
 </div>
-
-
-
-
+<h3>Users:</h3>
+<table class="table table-striped">
+    <tr>
+        <th>User</th>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+    {% for x in users %}
+        <tr>
+            <th>{{ x.get_full_name }}</th>
+            <th>{{ x.email }}</th>
+            <th>
+                {% if edit %}
+                <button class="btn">Edit user</button>
+                {% endif %}
+                {% if perm %}
+                <button class="btn">Edit permissions</button>
+                {% endif %}
+            </th>
+        </tr>
+    {% endfor %}
+</table>

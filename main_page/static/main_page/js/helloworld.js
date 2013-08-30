@@ -10,14 +10,6 @@ app.config(function ($interpolateProvider, $httpProvider) {
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 });
 
-app.directive("useredit", function () {
-    return {
-        restrict: "AEC",
-        templateUrl: "/accounts/useredit/",
-        transclude: true
-    };
-});
-
 app.directive("errorhandle", function () {
     return {
         restrict: "E",
@@ -25,14 +17,6 @@ app.directive("errorhandle", function () {
             errorname: '@'
         },
         templateUrl: "/error/",
-        transclude: true
-    }
-});
-
-app.directive("editperm", function () {
-    return {
-        restrict: "E",
-        templateUrl: "",
         transclude: true
     }
 });
@@ -90,11 +74,6 @@ function overallAppControler($scope, $http, $compile) {
         chosenApp(null);
         $scope.applist = true;
     };
-
-    $scope.showUserData = function () {
-        showModal("useredit");
-        loadUserData();
-    }
 
     loadUserData();
 }

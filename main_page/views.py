@@ -10,7 +10,11 @@ class Index(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(Index, self).get_context_data(**kwargs)
-        context['apps'] = settings.FLEXDB_APPS
+        context['apps'] = []
+        if self.request.user.is_authenticated():
+            for x in settings.FLEXDB_APPS:
+                if self.request.user.has_permission(x, 'access'):
+                    context['apps'].append(x)
         context['js'] = []
         context['css'] = []
         context['templates'] = {}
