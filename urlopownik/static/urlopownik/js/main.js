@@ -2,7 +2,7 @@ var Urlopownikstart = [];
 app.directive("urlopownik", function () {
     return {
         restrict: "E",
-        templateUrl: templates_dict['urlopownik'],
+        templateUrl: templates_dict['urlopownik'][0],
         transclude: true
     }
 });
