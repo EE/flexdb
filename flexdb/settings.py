@@ -126,6 +126,7 @@ FLEXDB_APPS = (
     'custom_user',
     'pusta1',
     'pusta2',
+    'urlopownik'
 )
 
 INSTALLED_APPS = (

@@ -1,4 +1,4 @@
-var app = angular.module("flexdb", []);
+var app = angular.module("flexdb", ['ui.bootstrap']);
 var chosenApp;
 var showError;
 var showModal;

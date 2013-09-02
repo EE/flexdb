@@ -1,0 +1,19 @@
+.urlopownik-global {
+  width: 100%; }
+
+.urlopownik-td-menu {
+  width: 10%;
+  vertical-align: top; }
+  .urlopownik-td-menu .urlopownik-td-site {
+    border: 1px solid #00d5d5;
+    padding: 4px 10px; }
+
+.urlopownik-menu, .urlopownik-td-site-inside {
+  text-align: center; }
+
+.urlopownik-hand-click {
+  cursor: pointer;
+  cursor: hand; }
+
+.urlopownik-watch-table, .urlopownik-watch-table td, .urlopownik-watch-table tr, .urlopownik-watch-table th {
+  border: 1px solid #000000; }
