@@ -24,6 +24,12 @@
   cursor: hand;
 }
 
-.urlopownik-watch-table, .urlopownik-watch-table td, .urlopownik-watch-table tr, .urlopownik-watch-table th {
-    border: 1px solid #000000;
+
+.urlopownik-watch-table td, .urlopownik-watch-table tr, .urlopownik-watch-table th {
+  border: 1px solid #000000;
+  text-align:center;
+}
+
+.urlopownik-watch-table {
+  width: 100%;
 }

@@ -40,11 +40,10 @@ function urlopownikRequestController ($scope, $http) {
     Urlopownikstart[0] = function () {
         $scope.sendrequest = false;
         $scope.failedrequest = false;
-    }
-
+    };
 
     $scope.applyForVacation = function () {
-        if (($scope.to < $scope.from) || ($scope.from < new Date())) {
+        if (($scope.to < $scope.from) || ($scope.from < new Date(new Date().setDate(new Date().getDate()-1)))) {
             showError ("Wrong dates, please change data.");
         } else {
             $scope.request.fromday = $scope.from.getDate().toString();
@@ -69,18 +68,17 @@ function urlopownikRequestController ($scope, $http) {
                 }).error (function () {
                     showError ("Error occured with connection to the server, please load page again.")
             });
-
         }
-
-    }
-
-
+    };
 }
 
 function urlopownikAcceptController ($scope, $http) {
     $scope.accepting = [];
     $scope.statuses = [];
-
+    $scope.search = {};
+    $scope.searchstatus;
+    $scope.find = [];
+    $scope.statusval = [];
 
     //uruchamiane do zobaczenia z roznym statusem!!!
     Urlopownikstart[1] = function () {
@@ -92,42 +90,53 @@ function urlopownikAcceptController ($scope, $http) {
         }).error (function () {
             showError ("Error occured with connection to the server, please load page again.")
         });
-    }
+    };
 
-    //lista do zaakceptowania
-    $scope.ToAcceptList = function () {
+    $scope.UrlopownikFind = function () {
         $http({
-            method: 'GET',
-            url: '/urlopownik/acceptstart/'
+            method: 'POST',
+            url: '/urlopownik/acceptfind/',
+            data: angular.toJson({searchstatus: $scope.searchstatus})
         }).success(function (data) {
-            $scope.accepting = [];
+            $scope.find = [];
+            $scope.statusval = [];
             var fromdate;
             var todate;
-            for (var i = 0; i < parseInt(data.length); i++){
-                fromdate = new Date (data.fromyear[i], data.frommonth[i], data.fromday[i]);
-                todate = new Date (data.toyear[i], data.tomonth[i], data.today[i]);
-                $scope.accepting.push({fromdate:fromdate, todate:todate, status:"undefined", reason:data.reason[i]});
+            for (var i = 0; i < parseInt(data.length); i++) {
+                fromdate = new Date(data.fromyear[i], data.frommonth[i], data.fromday[i]);
+                todate = new Date(data.toyear[i], data.tomonth[i], data.today[i]);
+                $scope.statusval[data.pk[i]] = data.status;
+                $scope.find.push({
+                    fromdate: fromdate,
+                    todate: todate,
+                    status: data.status,
+                    reason: data.reason[i],
+                    user: data.user[i],
+                    pk: data.pk[i]
+                });
             }
         }).error (function () {
             showError ("Error occured with connection to the server, please load page again.")
         });
-    }
 
-    $scope.UrlopownikFind = function () {
+    };
 
 
-    }
-    $scope.UrlopownikAccept = function () {
+    $scope.UrlopownikChange = function (number, it) {
         $http({
             method: 'POST',
-            url: '/urlopownik/accept/',
-            data: angular.toJson({cos: "cos"})
+            url: '/urlopownik/changestatus/',
+            data: angular.toJson({
+                status: $scope.statusval [number],
+                pk: number
+            })
         }).success(function (data) {
-
+                //if ok i czy sie zmienilo
+            $scope.find.splice( it, 1 );
         }).error (function () {
             showError ("Error occured with connection to the server, please load page again.")
         });
-    }
+    };
 
 }
 
@@ -154,5 +163,5 @@ function urlopownikWatchController ($scope, $http) {
         });
 
 
-    }
+    };
 }
