@@ -36,13 +36,15 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return self.first_name
 
     def get_full_name(self):
-        full_name = "{} {}".format(self.first_name, self.last_name)
+        full_name = "{} {}".format(self.first_name.encode('utf-8'), self.last_name.encode('utf-8'))
         return full_name.strip()
 
     def __unicode__(self):
         return self.username
 
-    def has_permisson(self, app_name, permission_name):
+    def has_permission(self, app_name, permission_name):
+        if self.is_superuser:
+            return True
         perm = UsersPermissions.objects.filter(user=self, app_name=app_name, permission_name=permission_name).count()
         if perm > 0:
             return True
@@ -65,3 +67,6 @@ class UsersPermissions(models.Model):
     user = models.ForeignKey(CustomUser)
     app_name = models.CharField(max_length=127)
     permission_name = models.CharField(max_length=127)
+
+    def __unicode__(self):
+        return "{}, {}, {}".format(self.user.username, self.app_name, self.permission_name)

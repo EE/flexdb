@@ -10,14 +10,6 @@ app.config(function ($interpolateProvider, $httpProvider) {
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 });
 
-app.directive("useredit", function () {
-    return {
-        restrict: "AEC",
-        templateUrl: "/accounts/useredit/",
-        transclude: true
-    };
-});
-
 app.directive("errorhandle", function () {
     return {
         restrict: "E",
@@ -29,7 +21,7 @@ app.directive("errorhandle", function () {
     }
 });
 
-function overallAppControler($scope, $http,  $compile) {
+function overallAppControler($scope, $http, $compile) {
     $scope.apps = {};
     $scope.data = {};
     $scope.user_URL = "";
@@ -38,17 +30,19 @@ function overallAppControler($scope, $http,  $compile) {
 
 
     $scope.ajaxDone = function (data) {
-        if (data.username != null) {
-            $scope.data.username = data.username;
-        }
-        if (data.first_name != null) {
-            $scope.data.first_name = data.first_name;
-        }
-        if (data.last_name != null) {
-            $scope.data.last_name = data.last_name;
-        }
-        if (data.email != null) {
-            $scope.data.email = data.email;
+        if (data != null) {
+            if (data.username != null) {
+                $scope.data.username = data.username;
+            }
+            if (data.first_name != null) {
+                $scope.data.first_name = data.first_name;
+            }
+            if (data.last_name != null) {
+                $scope.data.last_name = data.last_name;
+            }
+            if (data.email != null) {
+                $scope.data.email = data.email;
+            }
         }
     };
 
@@ -58,18 +52,20 @@ function overallAppControler($scope, $http,  $compile) {
             method: 'GET',
             url: '/accounts/users/'
         }).success(function (data) {
-                $scope.ajaxDone(data[0]);
-                if (data[0].url != null) {
-                    $scope.user_URL = data[0].url;
-                    $scope.logged = true;
+                if ((data != null) && (data[0] != null)) {
+                    $scope.ajaxDone(data[0]);
+                    if (data[0].url != null) {
+                        $scope.user_URL = data[0].url;
+                        $scope.logged = true;
+                    }
                 }
-            }).error (function () {
-                showError ("Error occured with connection to the server, please load page again.")
-        });
+            }).error(function () {
+                showError("Error occured with connection to the server, please load page again.")
+            });
     }
 
     $scope.appClick = function (appName) {
-        var newElement = $compile("<"+appName+">"+"</"+appName+">")($scope);
+        var newElement = $compile("<" + appName + ">" + "</" + appName + ">")($scope);
         chosenApp(newElement);
         $scope.applist = false;
     };
@@ -79,45 +75,24 @@ function overallAppControler($scope, $http,  $compile) {
         $scope.applist = true;
     };
 
-    $scope.showUserData = function () {
-        showModal ("useredit");
-        loadUserData();
-    }
-
     loadUserData();
 }
 
 function mainAppControler($element) {
     chosenApp = function (el) {
         $element.children(0).remove();
-        if(el != null) {
+        if (el != null) {
             $element.append(el);
         }
     };
 }
 
-function tableControll($scope, $http) {
-
-    $scope.changeUserData = function () {
-        $http({
-            method: 'PUT',
-            url: $scope.user_URL,
-            data: angular.toJson($scope.data)
-        }).success(function (data) {
-                $scope.ajaxDone(data)
-            }).error (function () {
-                showError ("Error occured with connection to the server, please load page again.")
-        });
-    };
-}
-
-
 function modalControll($scope, $element, $compile) {
 
     showModal = function (el, attr) {
-        var newElement = $compile("<"+el+" "+ attr+">"+"</"+el+">")($scope);
+        var newElement = $compile("<" + el + " " + attr + ">" + "</" + el + ">")($scope);
         $element.children(0).remove();
-        if(newElement != null) {
+        if (newElement != null) {
             $element.append(newElement);
             $element.modal('show');
         }
@@ -125,8 +100,6 @@ function modalControll($scope, $element, $compile) {
 
 
     showError = function (errorvalue) {
-        showModal ('errorhandle', 'errorname = "'+ errorvalue +'"');
+        showModal('errorhandle', 'errorname = "' + errorvalue + '"');
     };
-
-    //showError ("test test test");
 }
