@@ -123,6 +123,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 FLEXDB_APPS = (
+    'custom_user',
     'pusta1',
     'pusta2',
     'urlopownik'
@@ -144,7 +145,6 @@ INSTALLED_APPS = (
     'social_auth',
     # components
     'main_page',
-    'custom_user',
 ) + FLEXDB_APPS
 
 # A sample logging configuration. The only tangible logging
@@ -177,9 +177,9 @@ LOGGING = {
 }
 
 # social_auth
-LOGIN_URL          = '/login/'
+LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
-LOGIN_ERROR_URL    = '/login-error/'
+LOGIN_ERROR_URL = '/login-error/'
 
 SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
 SOCIAL_AUTH_UID_LENGTH = 222
@@ -188,4 +188,5 @@ SOCIAL_AUTH_ASSOCIATION_SERVER_URL_LENGTH = 135
 SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 125
 SOCIAL_AUTH_ENABLED_BACKENDS = ('google',)
 SOCIAL_AUTH_USER_MODEL = 'custom_user.CustomUser'
+GOOGLE_WHITE_LISTED_DOMAINS = ['laboratorium.ee']
 # social_auth end

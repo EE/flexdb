@@ -14,7 +14,7 @@
             {% for x, y in templates.items %}
                 templates_dict.{{ x }} = [];
                 {% for templ in y %}
-                    templates_dict.{{ x }} += '{% static templ %}';
+                    templates_dict.{{ x }}.push('{% static templ %}');
                 {% endfor %}
             {% endfor %}
         </script>
@@ -44,8 +44,6 @@
                     <li><a class="hand-click" ng-show="!logged" href="{% url 'socialauth_begin' 'google-oauth2' %}">Login</a>
                     </li>
                     <li><a class="hand-click" ng-show="logged" href="/logout/">Logout</a></li>
-                    <li><a class="hand-click" ng-click="showUserData()" data-toggle="modal" ng-show="logged">
-                        Change user data</a></li>
                     <li><a class="hand-click" ng-click="goToAppsList()">Go to apps list</a></li>
                 </ul>
             </div>

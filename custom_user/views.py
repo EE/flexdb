@@ -3,6 +3,7 @@ from custom_user.serializers import CustomUserSerializer
 from custom_user.models import CustomUser
 from custom_user.permissions import IsOwner
 from django.shortcuts import render
+from django.http import HttpResponse
 
 
 class CustomUserViewSet(viewsets.ModelViewSet):
@@ -16,4 +17,10 @@ class CustomUserViewSet(viewsets.ModelViewSet):
 
 
 def userEditView(request):
-    return render(request, 'custom_user/custom_user.html', {})
+    if request.user.is_authenticated():
+        data = {}
+        data['users'] = CustomUser.objects.all()#only("username", "first_name", "last_name", "email")
+        data['edit'] = request.user.has_permission('custom_user', 'edit')
+        data['perm'] = request.user.has_permission('custom_user', 'permissions')
+        return render(request, 'custom_user/custom_user.html', data)
+    return HttpResponse("")
